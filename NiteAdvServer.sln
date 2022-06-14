@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 25.0.1700.2
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NiteAdvServer", "NiteAdvServer\NiteAdvServer.csproj", "{5A17BC6F-F09E-4D94-BB36-3E1CF1B5CD25}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NiteAdvServerCore", "NiteAdvServerCore\NiteAdvServerCore.csproj", "{F564D4C6-4134-4290-9FAB-02FFA9EC8539}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5A17BC6F-F09E-4D94-BB36-3E1CF1B5CD25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A17BC6F-F09E-4D94-BB36-3E1CF1B5CD25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A17BC6F-F09E-4D94-BB36-3E1CF1B5CD25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A17BC6F-F09E-4D94-BB36-3E1CF1B5CD25}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F564D4C6-4134-4290-9FAB-02FFA9EC8539}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F564D4C6-4134-4290-9FAB-02FFA9EC8539}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F564D4C6-4134-4290-9FAB-02FFA9EC8539}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F564D4C6-4134-4290-9FAB-02FFA9EC8539}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A3DCDDE4-1991-4818-933F-84EA2A8CF787}
+	EndGlobalSection
+EndGlobal
