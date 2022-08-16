@@ -1,28 +1,33 @@
 {
   "format": 1,
   "restore": {
-    "/Users/mac/Projects/NiteAdvServer/NiteAdvServerCore/NiteAdvServerCore.csproj": {}
+    "C:\\Projects\\NiteAdvServer\\NiteAdvServerCore\\NiteAdvServerCore.csproj": {}
   },
   "projects": {
-    "/Users/mac/Projects/NiteAdvServer/NiteAdvServerCore/NiteAdvServerCore.csproj": {
+    "C:\\Projects\\NiteAdvServer\\NiteAdvServerCore\\NiteAdvServerCore.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/mac/Projects/NiteAdvServer/NiteAdvServerCore/NiteAdvServerCore.csproj",
+        "projectUniqueName": "C:\\Projects\\NiteAdvServer\\NiteAdvServerCore\\NiteAdvServerCore.csproj",
         "projectName": "NiteAdvServerCore",
-        "projectPath": "/Users/mac/Projects/NiteAdvServer/NiteAdvServerCore/NiteAdvServerCore.csproj",
-        "packagesPath": "/Users/mac/.nuget/packages/",
-        "outputPath": "/Users/mac/Projects/NiteAdvServer/NiteAdvServerCore/obj/",
+        "projectPath": "C:\\Projects\\NiteAdvServer\\NiteAdvServerCore\\NiteAdvServerCore.csproj",
+        "packagesPath": "C:\\Users\\marco\\.nuget\\packages\\",
+        "outputPath": "C:\\Projects\\NiteAdvServer\\NiteAdvServerCore\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
         ],
         "configFilePaths": [
-          "/Users/mac/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\marco\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -41,9 +46,17 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "AutoMapper": {
+              "target": "Package",
+              "version": "[11.0.1, )"
+            },
             "FirebaseAdmin": {
               "target": "Package",
               "version": "[2.3.0, )"
+            },
+            "Gremlin.Net": {
+              "target": "Package",
+              "version": "[3.4.13, )"
             },
             "MailKit": {
               "target": "Package",
@@ -77,7 +90,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/6.0.300/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.302\\RuntimeIdentifierGraph.json"
         }
       }
     }

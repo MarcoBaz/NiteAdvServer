@@ -3,6 +3,8 @@ using System;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using NiteAdvServerCore.DTO;
+using NiteAdvServerCore.DTO.Token;
+using NiteAdvServerCore.Entities;
 using NiteAdvServerCore.Managers;
 
 namespace NiteAdvServer.Controllers
@@ -31,6 +33,9 @@ namespace NiteAdvServer.Controllers
             return result;
         }
         #endregion
+
+        #region Crawler methos
+       
         [HttpPost]
         [Route("SaveStatus")]
         public string SaveStatus(StatusDTO statusDTO)
@@ -116,6 +121,105 @@ namespace NiteAdvServer.Controllers
                 return "Authentication Failed";
 
         }
+        #endregion
+        #region App Methods
+        [HttpPost]
+        [Route("SyncCompanies")]
+        public SyncCompanyResponseDTO SyncCompanies(SyncCompanyTokenDTO token)
+        {
+            if (checkAuthentication())
+            {
+                var res = BusinessLogic.SyncCompanies(token);
+                return res;
+
+            }
+            else
+            {
+                return new SyncCompanyResponseDTO() { ActionResult = 400, ActionError = "Authentication Failed" };
+            }
+
+        }
+        [HttpPost]
+        [Route("SyncEvents")]
+        public SyncEventResponseDTO SyncEvents(SyncEventTokenDTO token)
+        {
+            if (checkAuthentication())
+            {
+                var res = BusinessLogic.SyncEvents(token);
+                return res;
+
+            }
+            else
+                return new SyncEventResponseDTO() { ActionResult = 400, ActionError = "Authentication Failed" };
+
+        }
+        [HttpPost]
+        [Route("Nations")]
+        public List<Nation> nations()
+        {
+            if (checkAuthentication())
+            {
+                return BusinessLogic.GetNations();
+            }
+            else
+                return new List<Nation>();
+
+        }
+        [HttpPost]
+        [Route("GetCitiesMobile")]
+        public List<City> GetCitiesMobile(SyncCityTokenDTO token)
+        {
+            if (checkAuthentication())
+            {
+                var cities = BusinessLogic.GetCities(token.LastSyncDate);
+                return cities;
+
+            }
+            else
+                return new List<City>();
+
+        }
+        [HttpGet]
+        [Route("Test")]
+        public List<CompanyDTO> Test()
+        {
+            SyncCompanyTokenDTO token = new SyncCompanyTokenDTO();
+            token.LastSyncDate = new DateTime(1970, 1, 1, 0, 0, 0);// LastSyncCompany;
+            token.Region = "Milano";
+             var res = BusinessLogic.SyncCompanies(token);
+
+            return res.CompanyDTOList;
+        }
+
+        [HttpPost]
+        [Route("RegisterUser")]
+        public UserDTO RegisterUser(UserDTO token)
+        {
+            if (checkAuthentication())
+            {
+                var res = BusinessLogic.RegisterUser(token);
+                return res;
+
+            }
+            else
+                return new UserDTO() { ActionResult = 400, ActionError = "Authentication Failed" };
+
+        }
+        [HttpPost]
+        [Route("LoginUser")]
+        public UserDTO LoginUser(LoginDTO token)
+        {
+            if (checkAuthentication())
+            {
+                var res = BusinessLogic.LoginUser(token);
+                return res;
+
+            }
+            else
+                return new UserDTO() { ActionResult = 400, ActionError = "Authentication Failed" };
+
+        }
+        #endregion
     }
 }
 

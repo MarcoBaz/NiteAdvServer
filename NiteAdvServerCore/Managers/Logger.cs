@@ -7,78 +7,77 @@ using System.Threading.Tasks;
 
 
 
-namespace NiteAdvServerCore.Managers
+namespace NiteAdvServerCore.Managers;
+
+public static class Logger
 {
-    public static class Logger
+
+    public static void Write(string dockerID,string logMessage, string logType) //LoggerType logType = LoggerType.info
     {
 
-        public static void Write(string dockerID,string logMessage, string logType) //LoggerType logType = LoggerType.info
+        try
         {
 
-            try
+
+            LoggerType logTypeToSend = LoggerType.info;
+            if (logType.ToLower() =="error")
             {
-
-
-                LoggerType logTypeToSend = LoggerType.info;
-                if (logType.ToLower() =="error")
-                {
-                    //sendMail
-                    //if (MailingListLogger != null && MailingListLogger.Any())
-                    //{
-                    //    MailingListLogger.ForEach(x => {
-                    //       //string body = "Dal processo automatico delle scansioni delle bolle sono state trovate mancate associazioni dei seguenti  file:\n  " + logMessage;
-                    //        MailHelper.SendMail("marco.bazzoli@outlook.it", x, "Messaggio Servizio Cora", logMessage); //marco@assistenzacora.it
-                    //    });
-                    //}
-                    logTypeToSend =  LoggerType.error;
-                }
-                else if (logType.ToLower() == "warning")
-                    logTypeToSend = LoggerType.warning;
-
-                Log(dockerID, logMessage, logTypeToSend);
+                //sendMail
+                //if (MailingListLogger != null && MailingListLogger.Any())
+                //{
+                //    MailingListLogger.ForEach(x => {
+                //       //string body = "Dal processo automatico delle scansioni delle bolle sono state trovate mancate associazioni dei seguenti  file:\n  " + logMessage;
+                //        MailHelper.SendMail("marco.bazzoli@outlook.it", x, "Messaggio Servizio Cora", logMessage); //marco@assistenzacora.it
+                //    });
+                //}
+                logTypeToSend =  LoggerType.error;
             }
-            catch (Exception ex)
-            {
+            else if (logType.ToLower() == "warning")
+                logTypeToSend = LoggerType.warning;
 
-            }
+            Log(dockerID, logMessage, logTypeToSend);
         }
-
-
-        private static void Log(string dockerID,string logMessage, LoggerType logType)
+        catch (Exception ex)
         {
-            try
-            {
-                var log = new Log();
-                log.Id = 0;
-                log.Data = DateTime.UtcNow;
-                log.DockerID = dockerID;
-                log.Message = logMessage;
-                log.LogType = logType.ToString();
-                log.LastSyncDate = DateTime.UtcNow;
-              
-                SqlServerManager.Save<Log>(log);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-        }
 
-        private static List<String> MailingListLogger
-        {
-            get
-            {
-                List<String> mails = new List<string>();
-                mails.Add("marco.bazzoli@outlook.it");
-                return mails;
-            }
         }
-
     }
-    public enum LoggerType
+
+
+    private static void Log(string dockerID,string logMessage, LoggerType logType)
     {
-        error,
-        info,
-        warning
+        try
+        {
+            var log = new Log();
+            log.Id = 0;
+            log.Data = DateTime.UtcNow;
+            log.DockerID = dockerID;
+            log.Message = logMessage;
+            log.LogType = logType.ToString();
+            log.LastSyncDate = DateTime.UtcNow;
+          
+            SqlServerManager.Save<Log>(log);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
     }
+
+    private static List<String> MailingListLogger
+    {
+        get
+        {
+            List<String> mails = new List<string>();
+            mails.Add("marco.bazzoli@outlook.it");
+            return mails;
+        }
+    }
+
+}
+public enum LoggerType
+{
+    error,
+    info,
+    warning
 }

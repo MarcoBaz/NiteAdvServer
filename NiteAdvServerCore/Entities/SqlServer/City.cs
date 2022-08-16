@@ -15,5 +15,9 @@ namespace NiteAdvServerCore.Entities
         public string Description { get; set; }
         public int Deep { get; set; }
 
+        public Decimal Latitude { get; set; }
+        public Decimal Longitude{ get; set; }
+        public string State { get; set; }
+        public DateTime LastSyncDate { get; set; }
     }
 }

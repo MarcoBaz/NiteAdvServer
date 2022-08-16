@@ -2,12 +2,16 @@
 
 # compiled output
 /dist
-/dist-server
 /tmp
 /out-tsc
+**/*.zip
 
 # dependencies
 /node_modules
+
+# profiling files
+chrome-profiler-events.json
+speed-measure-plugin.json
 
 # IDEs and editors
 /.idea
@@ -26,6 +30,7 @@
 !.vscode/extensions.json
 
 # misc
+/.angular/cache
 /.sass-cache
 /connect.lock
 /coverage
@@ -38,4 +43,4 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
-
+*.angulardoc.json
