@@ -1,0 +1,47 @@
+
+
+<div  #layout>
+    <div class="modal-success d-inline-block">
+        <ng-template #modalSuccess let-modal>
+            <div class="modal-header">
+              <h5 class="modal-title" id="myModalLabel160">{{title}}</h5>
+              <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body" tabindex="0" ngbAutofocus>
+              {{contentMessage}}
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-success" (click)="modal.close('Accept click')" rippleEffect>
+                Accept
+              </button>
+            </div>
+          </ng-template>
+    </div>
+    
+
+
+   
+    
+
+    <div class="modal-danger d-inline-block">
+        <ng-template #modalDanger let-modal>
+            <div class="modal-header">
+              <h5 class="modal-title" id="myModalLabel160">{{title}}</h5>
+              <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body" tabindex="0" ngbAutofocus>
+              {{contentMessage}}
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" (click)="modal.close('Accept click')" rippleEffect>
+                Accept
+              </button>
+            </div>
+          </ng-template>
+    </div>
+    
+  </div>

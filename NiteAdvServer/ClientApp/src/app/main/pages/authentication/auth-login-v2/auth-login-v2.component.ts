@@ -3,7 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { takeUntil, first } from 'rxjs/operators';
 import { Subject } from 'rxjs';
-
+import {AppService} from 'app/app.service'
 import { AuthenticationService } from 'app/auth/service';
 import { CoreConfigService } from '@core/services/config.service';
 
@@ -36,12 +36,13 @@ export class AuthLoginV2Component implements OnInit {
     private _formBuilder: UntypedFormBuilder,
     private _route: ActivatedRoute,
     private _router: Router,
-    private _authenticationService: AuthenticationService
+    private _appService: AppService,
+    //private _authenticationService: AuthenticationService
   ) {
     // redirect to home if already logged in
-    if (this._authenticationService.currentUserValue) {
-      this._router.navigate(['/']);
-    }
+   // if (this._authenticationService.currentUserValue) {
+   //   this._router.navigate(['/']);
+   // }
 
     this._unsubscribeAll = new Subject();
 
@@ -85,18 +86,9 @@ export class AuthLoginV2Component implements OnInit {
 
     // Login
     this.loading = true;
-    this._authenticationService
-      .login(this.f.email.value, this.f.password.value)
-      .pipe(first())
-      .subscribe(
-        data => {
-          this._router.navigate([this.returnUrl]);
-        },
-        error => {
-          this.error = error;
-          this.loading = false;
-        }
-      );
+   
+    this._appService.Login(this.f.email.value, this.f.password.value);
+      
   }
 
   // Lifecycle Hooks
@@ -110,7 +102,25 @@ export class AuthLoginV2Component implements OnInit {
       email: ['admin@demo.com', [Validators.required, Validators.email]],
       password: ['admin', Validators.required]
     });
+    this._appService.onLoginError
+    .pipe(takeUntil(this._unsubscribeAll))
+    .subscribe(message => {
+      if (message != '') {
 
+        //var comp = new ConfirmComponent(this._matDialog);
+        //comp.openDialog("Errore", message, false);
+      }
+    });
+    this._appService.onUserChanged
+    .pipe(takeUntil(this._unsubscribeAll))
+    .subscribe(user => {
+      if (user != null)
+      {
+        localStorage.setItem('currentUser', JSON.stringify(user));
+        this.returnUrl =  '/';
+      }
+      
+    });
     // get return url from route parameters or default to '/'
     this.returnUrl = this._route.snapshot.queryParams['returnUrl'] || '/';
 

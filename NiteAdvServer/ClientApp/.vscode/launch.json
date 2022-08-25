@@ -1,0 +1,23 @@
+{
+    // Usare IntelliSense per informazioni sui possibili attributi.
+    // Al passaggio del mouse vengono visualizzate le descrizioni degli attributi esistenti.
+    // Per altre informazioni, visitare: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "ng test",
+            "type": "chrome",
+            "request": "launch",
+            "url": "https://localhost:44414/",
+            "webRoot": "${workspaceFolder}",
+            "sourceMaps": true,
+            "sourceMapPathOverrides": {
+              "webpack:/*": "${webRoot}/*",
+              "/./*": "${webRoot}/*",
+              "/src/*": "${webRoot}/*",
+              "/*": "*",
+              "/./~/*": "${webRoot}/node_modules/*"
+            }
+          },
+    ]
+}

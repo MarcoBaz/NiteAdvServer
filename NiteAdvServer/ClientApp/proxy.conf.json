@@ -1,0 +1,12 @@
+{
+
+    "/Web/*": {
+        "target":  "https://localhost:7277",
+        "secure": false,
+        "logLevel": "debug",
+        "changeOrigin": true
+    }
+}
+
+
+        

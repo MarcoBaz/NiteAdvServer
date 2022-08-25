@@ -6,9 +6,12 @@ import { environment } from './environments/environment';
 
 import { hmrBootstrap } from './hmr';
 
+
+
 if (environment.production) {
   enableProdMode();
 }
+
 
 const bootstrap = () => platformBrowserDynamic().bootstrapModule(AppModule);
 
@@ -22,3 +25,6 @@ if (environment.hmr) {
 } else {
   bootstrap().catch(err => console.log(err));
 }
+
+
+

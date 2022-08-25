@@ -699,7 +699,7 @@ export class EcommerceComponent implements OnInit {
         localStorage.getItem('currentUser')
       ) {
         setTimeout(() => {
-          if (this.currentUser.role == 'Admin') {
+        //  if (this.currentUser.role == 'Admin') {
             // Get Dynamic Width for Charts
             this.isMenuToggled = true;
             this.statisticsBar.chart.width = this.statisticsBarChartRef?.nativeElement.offsetWidth;
@@ -708,7 +708,7 @@ export class EcommerceComponent implements OnInit {
             this.revenueReportChartoptions.chart.width = this.revenueReportChartRef?.nativeElement.offsetWidth;
             this.budgetChartoptions.chart.width = this.budgetChartRef?.nativeElement.offsetWidth;
             this.goalChartoptions.chart.width = this.goalChartRef?.nativeElement.offsetWidth;
-          }
+          //}
         }, 500);
       }
     });

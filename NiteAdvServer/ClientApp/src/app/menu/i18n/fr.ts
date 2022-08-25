@@ -9,6 +9,8 @@ export const locale = {
         ECOMMERCE: 'commerce électronique'
       },
       APPS: {
+        EVENTS: 'Events',
+        COMPANIES: 'Companies',
         SECTION: 'Applications et pages',
         EMAIL: 'E-mail',
         CHAT: 'Discuter',

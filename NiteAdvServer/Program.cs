@@ -1,6 +1,10 @@
-﻿var builder = WebApplication.CreateBuilder(args);
+﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
-// Add services to the container.
+var builder = WebApplication.CreateBuilder(args);
+
 
 builder.Services.AddControllersWithViews();
 
@@ -13,16 +17,17 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
 
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller}/{action=Index}/{id?}");
+    pattern: "{controller=Api}/{action=Index}/{id?}");
+
 
 app.MapFallbackToFile("index.html");;
 
-app.Run();
+app.Run(); 
 

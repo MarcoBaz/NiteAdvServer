@@ -37,6 +37,32 @@ export const menu: CoreMenu[] = [
       }
     ]
   },
+  //Nite Advisor
+  {
+    id: 'nite',
+    type: 'section',
+    title: 'Nite Advisor',
+    translate: 'MENU.APPS.SECTION',
+    icon: 'package',
+    children: [
+      {
+        id: 'events',
+        title: 'Events',
+        translate: 'MENU.APPS.EVENTS',
+        type: 'item',
+        icon: 'mail',
+        url: 'portal/events'
+      },
+      {
+        id: 'companies',
+        title: 'Companies',
+        translate: 'MENU.APPS.COMPANIES',
+        type: 'item',
+        icon: 'mail',
+        url: 'portal/companies'
+      }
+    ]
+  },
   // Apps & Pages
   {
     id: 'apps',

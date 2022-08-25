@@ -30,11 +30,18 @@ import { ContextMenuComponent } from 'app/main/extensions/context-menu/context-m
 import { AnimatedCustomContextMenuComponent } from './main/extensions/context-menu/custom-context-menu/animated-custom-context-menu/animated-custom-context-menu.component';
 import { BasicCustomContextMenuComponent } from './main/extensions/context-menu/custom-context-menu/basic-custom-context-menu/basic-custom-context-menu.component';
 import { SubMenuCustomContextMenuComponent } from './main/extensions/context-menu/custom-context-menu/sub-menu-custom-context-menu/sub-menu-custom-context-menu.component';
+import { RestService } from './rest.service';
+import { AppService } from './app.service';
+import { ConfirmComponent} from './main/portal/confirm-dialog/confirm.component';
 
 const appRoutes: Routes = [
   {
     path: 'dashboard',
     loadChildren: () => import('./main/dashboard/dashboard.module').then(m => m.DashboardModule)
+  },
+  {
+    path: 'portal',
+    loadChildren: () => import('./main/portal/portal.module').then(m => m.PortalModule)
   },
   {
     path: 'apps',
@@ -92,7 +99,8 @@ const appRoutes: Routes = [
         ContextMenuComponent,
         BasicCustomContextMenuComponent,
         AnimatedCustomContextMenuComponent,
-        SubMenuCustomContextMenuComponent
+        SubMenuCustomContextMenuComponent,
+        //ConfirmComponent
     ],
     imports: [
         BrowserModule,
@@ -121,9 +129,14 @@ const appRoutes: Routes = [
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+        RestService,
+        AppService,
         // ! IMPORTANT: Provider used to create fake backend, comment while using real API
         fakeBackendProvider
     ],
-    bootstrap: [AppComponent]
+    bootstrap: [AppComponent],
+    entryComponents: [
+      //ConfirmComponent
+    ]
 })
 export class AppModule {}

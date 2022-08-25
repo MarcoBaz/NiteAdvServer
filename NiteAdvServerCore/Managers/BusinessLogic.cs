@@ -2,21 +2,23 @@
 using NiteAdvServerCore.DTO;
 using NiteAdvServerCore.DTO.Token;
 using NiteAdvServerCore.Entities;
+using NiteAdvServerCore.Generic;
 using NiteAdvServerCore.Util;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Twilio.Jwt.AccessToken;
 
 namespace NiteAdvServerCore.Managers;
 
-public static  class BusinessLogic
+public static class BusinessLogic
 {
     public static Mapper MapperManager = new Mapper(MapperConfigurator.Configure);
 
     #region crawler
-   
+
     public static StatusDTO SaveStatus(StatusDTO statusDTO)
     {
         StatusDTO result = new StatusDTO();
@@ -31,9 +33,9 @@ public static  class BusinessLogic
             if (existingStatus == null)
             {
                 int? count = SqlServerManager.FreeQueryCount("Select MAX(Id) from Status");
-                 id = count == null ? 1 : count.Value + 1;
+                id = count == null ? 1 : count.Value + 1;
                 SqlServerManager.FreeQuery<Status>("insert into Status (Id,IdConfig,IdStatusDescription,DeviceIP,Message,City,LastSyncDate) values (" + id + "," + config.Id + "," + statusDTO.IdStatusDescription + ",'" + statusDTO.DeviceIp + "','" + statusDTO.Message + "','" + statusDTO.City + "', CONVERT(DATETIME, '" + DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss.fff tt") + "',103) )");
-                
+
             }
             else
             {
@@ -43,7 +45,7 @@ public static  class BusinessLogic
             var EntityResult = SqlServerManager.GetBaseEntity<Status>("Id=" + id);
             if (EntityResult == null)
                 throw new Exception("error on inssert or update");
-         
+
             //var EntityResult = SqlServerManager.GetBaseEntity<Status>("Id=" + statusDTO.Id);
             result.DockerId = statusDTO.DockerId;
             result.IdStatusDescription = EntityResult.IdStatusDescription;
@@ -67,7 +69,7 @@ public static  class BusinessLogic
     }
     public static StatusDTO GetStatus(string DockerId)
     {
-        StatusDTO result= new StatusDTO();
+        StatusDTO result = new StatusDTO();
         try
         {
             var config = SqlServerManager.GetBaseEntity<Config>("DockerId='" + DockerId + "'");
@@ -93,8 +95,8 @@ public static  class BusinessLogic
             result.ActionError = ex.Message;
         }
         return result;
-    
-       
+
+
     }
     public static List<Status> GetAllStatus()
     {
@@ -124,7 +126,7 @@ public static  class BusinessLogic
             result.ActionError = ex.Message;
         }
         return result;
-        
+
     }
     public static List<City> GetCities()
     {
@@ -183,7 +185,7 @@ public static  class BusinessLogic
                     var dto = MapperConfigurator.ConvertCompany(x);
                     result.CompanyDTOList.Add(dto);
                 });
-                
+
             }
             result.ActionResult = 200;
         }
@@ -213,7 +215,7 @@ public static  class BusinessLogic
                     //IEnumerable<KeyValuePair<string, object>> valueList = (IEnumerable<KeyValuePair<string, object>>)list.Values.ToList()[0];
                     var Event = GremlinManager.Instance.CreateIstance<Event>((IEnumerable<KeyValuePair<string, object>>)list.Values.ToList()[0]);
                     var Company = GremlinManager.Instance.CreateIstance<Company>((IEnumerable<KeyValuePair<string, object>>)list.Values.ToList()[1]);
-                    var dto = MapperConfigurator.ConvertEvent(Event,Company.id);
+                    var dto = MapperConfigurator.ConvertEvent(Event, Company.id);
                     result.EventDTOList.Add(dto);
 
                 }
@@ -254,20 +256,20 @@ public static  class BusinessLogic
         }
         return result;
     }
-    public static UserDTO LoginUser(LoginDTO loginDTO)
+    public static UserDTO LoginUser(string email, string password)
     {
         UserDTO result = new UserDTO();
         try
         {
-            var syncResult = GremlinManager.Instance.RetreiveData<User>($"g.V().hasLabel('user').has('Email','{loginDTO.Email}').has('Password','{loginDTO.Password}')");
+            var syncResult = GremlinManager.Instance.RetreiveData<User>($"g.V().hasLabel('user').has('Email','{email.ToLower()}').has('Password','{password}')");
             if (syncResult != null && syncResult.Any())
             {
                 var us = syncResult.First();
                 result = MapperConfigurator.ConvertUser(us);
             }
             else
-                    throw new Exception("User Alredy Exists");
-               
+                throw new Exception("User null");
+
             result.ActionResult = 200;
         }
         catch (Exception ex)
@@ -276,6 +278,34 @@ public static  class BusinessLogic
             result.ActionError = ex.Message;
         }
         return result;
+    }
+    #endregion
+
+    #region Web
+
+    public static CompanyResponse GetCompaniesList(FilterCompany filter)
+    {
+        CompanyResponse result = new CompanyResponse();
+        int startIndex = filter.PageSize * filter.Offset;
+        int endIndex = startIndex + filter.PageSize;
+        string query = $"g.V().hasLabel('company').range({startIndex},{endIndex})";
+        if (!String.IsNullOrWhiteSpace(filter.Where))
+        {
+
+        }
+        var items =  GremlinManager.Instance.RetreiveData<Company>(query);
+        if (items != null && items.Any())
+        {
+            result.CompanyList.AddRange(items);
+            int count = (int) GremlinManager.Instance.Count("g.V().hasLabel('company').count()");
+            result.ItemsCount = count;
+        }
+        return result;
+    }
+
+    public static Company SaveCompany(Company company)
+    {
+        return GremlinManager.Instance.SaveVertex<Company>(company);
     }
     #endregion
 }

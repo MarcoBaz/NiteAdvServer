@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "vuexy": {
+    "NiteADVServer": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -40,12 +40,12 @@
               "bs-stepper",
               "feather-icons"
             ],
-            "outputPath": "dist/vuexy",
+            "outputPath": "dist/NiteADVServer",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "src/tsconfig.app.json",
-            "assets": ["src/favicon.ico", "src/assets"],
+            "assets": [ "src/favicon.ico", "src/assets" ],
             "styles": [
               "src/styles.scss",
               "node_modules/highlight.js/scss/atom-one-dark.scss",
@@ -58,9 +58,9 @@
               "./node_modules/@fullcalendar/list/main.css"
             ],
             "stylePreprocessorOptions": {
-              "includePaths": ["node_modules", "src/assets/"]
+              "includePaths": [ "node_modules", "src/assets/" ]
             },
-            "scripts": ["./node_modules/katex/dist/katex.min.js", "./node_modules/quill/dist/quill.min.js"],
+            "scripts": [ "./node_modules/katex/dist/katex.min.js", "./node_modules/quill/dist/quill.min.js" ],
             "vendorChunk": true,
             "extractLicenses": false,
             "buildOptimizer": false,
@@ -116,22 +116,23 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "vuexy:build"
+            "browserTarget": "NiteADVServer:build",
+            "proxyConfig": "proxy.conf.json"
           },
           "configurations": {
             "production": {
-              "browserTarget": "vuexy:build:production"
+              "browserTarget": "NiteADVServer:build:production"
             },
-            "hmr": {
-              "hmr": true,
-              "browserTarget": "vuexy:build:hmr"
+            "development": {
+              "browserTarget": "NiteADVServer:build:development"
+              
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "vuexy:build"
+            "browserTarget": "NiteADVServer:build"
           }
         },
         "test": {
@@ -141,17 +142,41 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "src/tsconfig.spec.json",
             "karmaConfig": "src/karma.conf.js",
-            "styles": ["src/styles.scss"],
-            "scripts": ["node_modules/apexcharts/dist/apexcharts.min.js"],
-            "assets": ["src/favicon.ico", "src/assets"],
+            "styles": [ "src/styles.scss" ],
+            "scripts": [ "node_modules/apexcharts/dist/apexcharts.min.js" ],
+            "assets": [ "src/favicon.ico", "src/assets" ],
             "stylePreprocessorOptions": {
-              "includePaths": ["node_modules", "src/assets/"]
+              "includePaths": [ "node_modules", "src/assets/" ]
+            }
+          }
+        },
+        "server": {
+          "builder": "@angular-devkit/build-angular:server",
+          "options": {
+            "outputPath": "dist-server",
+            "main": "src/main.ts",
+            "tsConfig": "src/tsconfig.server.json"
+          },
+          "configurations": {
+            "dev": {
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true
+            },
+            "production": {
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true
             }
           }
         }
       }
     },
-    "vuexy-e2e": {
+    "NiteADVServer-e2e": {
       "root": "e2e/",
       "projectType": "application",
       "prefix": "",
@@ -160,11 +185,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "vuexy:serve"
+            "devServerTarget": "NiteADVServer:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "vuexy:serve:production"
+              "devServerTarget": "NiteADVServer:serve:production"
             }
           }
         }

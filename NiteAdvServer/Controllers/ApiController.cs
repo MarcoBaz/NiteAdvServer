@@ -1,7 +1,9 @@
 ﻿
 using System;
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using NiteAdvServer.ViewModel;
 using NiteAdvServerCore.DTO;
 using NiteAdvServerCore.DTO.Token;
 using NiteAdvServerCore.Entities;
@@ -179,18 +181,7 @@ namespace NiteAdvServer.Controllers
                 return new List<City>();
 
         }
-        [HttpGet]
-        [Route("Test")]
-        public List<CompanyDTO> Test()
-        {
-            SyncCompanyTokenDTO token = new SyncCompanyTokenDTO();
-            token.LastSyncDate = new DateTime(1970, 1, 1, 0, 0, 0);// LastSyncCompany;
-            token.Region = "Milano";
-             var res = BusinessLogic.SyncCompanies(token);
-
-            return res.CompanyDTOList;
-        }
-
+    
         [HttpPost]
         [Route("RegisterUser")]
         public UserDTO RegisterUser(UserDTO token)
@@ -211,7 +202,7 @@ namespace NiteAdvServer.Controllers
         {
             if (checkAuthentication())
             {
-                var res = BusinessLogic.LoginUser(token);
+                var res = BusinessLogic.LoginUser(token.Email,token.Password);
                 return res;
 
             }
@@ -219,6 +210,20 @@ namespace NiteAdvServer.Controllers
                 return new UserDTO() { ActionResult = 400, ActionError = "Authentication Failed" };
 
         }
+        #endregion
+        #region Test
+        [HttpGet]
+        [Route("Test")]
+        public List<CompanyDTO> Test()
+        {
+            SyncCompanyTokenDTO token = new SyncCompanyTokenDTO();
+            token.LastSyncDate = new DateTime(1970, 1, 1, 0, 0, 0);// LastSyncCompany;
+            token.Region = "Milano";
+            var res = BusinessLogic.SyncCompanies(token);
+
+            return res.CompanyDTOList;
+        }
+       
         #endregion
     }
 }

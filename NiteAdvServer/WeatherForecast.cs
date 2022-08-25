@@ -1,4 +1,6 @@
-﻿namespace NiteAdvServer;
+﻿using System;
+
+namespace NiteAdvServer;
 
 public class WeatherForecast
 {

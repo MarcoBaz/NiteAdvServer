@@ -267,7 +267,13 @@ internal class GremlinManager
         }
         return result;
     }
+    public long Count(string query) 
+    {
 
+        using var gremlinClient = GetClient();
+        var resultSet = SubmitRequest(gremlinClient, query).Result;
+        return resultSet.FirstOrDefault();
+    }
     public T SaveVertex<T>(T vertex, bool updateLastSyncDate=true) where T : VertexEntity
     {
         T result = default(T);
