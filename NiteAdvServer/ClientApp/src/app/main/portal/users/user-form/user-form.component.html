@@ -1,0 +1,90 @@
+<ng-template #modalForm let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="myModalLabel1">User</h4>
+      <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <form class="form" [formGroup]="userForm">
+    <div class="modal-body" tabindex="0" ngbAutofocus>
+        
+            <input Type="hidden" name="id" formControlName="id">
+            <input Type="hidden" name="LastSyncDate" formControlName="LastSyncDate">
+            <!--<input Type="hidden" name="Canceled" formControlName="Canceled">-->
+            <div class="row">
+              <div class="col-md-6 col-12">
+                <div class="form-group">
+                  <label for="Name">Name</label>
+                  <input type="text"  formControlName="Name" class="form-control" placeholder="Name"  name="Name" />
+                </div>
+              </div>
+              <div class="col-md-6 col-12">
+                <div class="form-group">
+                  <label for="Surename">Surename</label>
+                  <input type="text"  formControlName="Surename" class="form-control" placeholder="Surename"  name="Surename" />
+                </div>
+              </div>
+              <div class="col-md-6 col-12">
+                <div class="form-group">
+                  <label for="Email">Email</label>
+                  <input type="text" formControlName="Email" class="form-control" placeholder="Email" name="Email" />
+                </div>
+              </div>
+              <div class="col-md-6 col-12">
+                <div class="form-group">
+                    <label for="Password">Password</label>
+                    <input type="text" formControlName="Password" class="form-control" placeholder="Password" name="Password" />
+                </div>
+              </div>
+              <!-- [(ngModel)]="BirthDate" formControlName="BirthDateDate name="BirthDateDate"-->
+              <div class="col-md-6 col-12">
+                <div class="form-group">
+                  <label for="birthDateForm">BirthDate</label>
+                  <div class="input-group"> 
+                    <input class="form-control" [(ngModel)]="birthDateForm" name="birthDateForm"
+                      ngbDatepicker #d="ngbDatepicker" [ngModelOptions]="{standalone: true}">
+                    <div class="input-group-append">
+                      <button class="btn btn-outline-secondary feather icon-calendar" (click)="d.toggle()"
+                        type="button" rippleEffect></button>
+                    </div>
+                 </div> 
+                </div>
+              </div>
+              <div class="col-md-6 col-12">
+                <div class="form-group">
+          
+                    <label for="Disabled">Disabled</label>
+                  <input type="checkbox" id="Disabled" class="form-control" placeholder="Disabled" name="Disabled" />
+                   
+
+                    <!-- <div class="custom-control custom-control-primary custom-checkbox"> -
+                      <input type="checkbox" class="custom-control-input" id="Disabled" class="form-control" placeholder="Disabled" name="Disabled" />
+                      <label class="custom-control-label" for="Disabled">Disabled</label>
+                   </div> -->
+
+ 
+                  </div>
+              </div>
+              <div class="col-12">
+               
+              </div>
+            </div>
+          
+     <!-- <form action="#">
+        <label>Email: </label>
+        <div class="form-group">
+          <input type="text" placeholder="Email Address" class="form-control" />
+        </div>
+        <label>Password: </label>
+        <div class="form-group">
+          <input type="password" placeholder="Password" class="form-control" />
+        </div>
+      </form> -->
+    </div>
+    <div class="modal-footer">
+       
+        <button type="delete" rippleEffect class="btn btn-outline-secondary" rippleEffect (click)="closeForm('delete',userForm)">Delete</button>
+        <button type="submit" rippleEffect class="btn btn-primary mr-1" rippleEffect (click)="closeForm('save',userForm)">Submit</button>
+    </div> 
+   </form>
+  </ng-template>

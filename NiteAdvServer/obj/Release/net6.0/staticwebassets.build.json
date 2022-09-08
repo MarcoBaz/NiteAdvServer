@@ -1,0 +1,37 @@
+{
+  "Version": 1,
+  "Hash": "40zXB4MNs/fGO8T1v8l0KvPSApixFUDK9Pi4Q9Lzcho=",
+  "Source": "NiteAdvServer",
+  "BasePath": "_content/NiteAdvServer",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "NiteAdvServer/wwwroot",
+      "Source": "NiteAdvServer",
+      "ContentRoot": "/Users/mac/Projects/NiteAdvServer/NiteAdvServer/wwwroot/",
+      "BasePath": "_content/NiteAdvServer",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "/Users/mac/Projects/NiteAdvServer/NiteAdvServer/wwwroot/favicon.ico",
+      "SourceId": "NiteAdvServer",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/mac/Projects/NiteAdvServer/NiteAdvServer/wwwroot/",
+      "BasePath": "_content/NiteAdvServer",
+      "RelativePath": "favicon.ico",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/favicon.ico"
+    }
+  ]
+}

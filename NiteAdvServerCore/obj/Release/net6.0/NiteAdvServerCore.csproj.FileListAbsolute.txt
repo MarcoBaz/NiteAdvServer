@@ -1,0 +1,17 @@
+/Users/mac/Projects/NiteAdvServer/NiteAdvServerCore/bin/Release/net6.0/Microsoft.Azure.Cosmos.ServiceInterop.dll
+/Users/mac/Projects/NiteAdvServer/NiteAdvServerCore/bin/Release/net6.0/Cosmos.CRTCompat.dll
+/Users/mac/Projects/NiteAdvServer/NiteAdvServerCore/bin/Release/net6.0/msvcp140.dll
+/Users/mac/Projects/NiteAdvServer/NiteAdvServerCore/bin/Release/net6.0/vcruntime140.dll
+/Users/mac/Projects/NiteAdvServer/NiteAdvServerCore/bin/Release/net6.0/vcruntime140_1.dll
+/Users/mac/Projects/NiteAdvServer/NiteAdvServerCore/bin/Release/net6.0/NiteAdvServerCore.deps.json
+/Users/mac/Projects/NiteAdvServer/NiteAdvServerCore/bin/Release/net6.0/NiteAdvServerCore.dll
+/Users/mac/Projects/NiteAdvServer/NiteAdvServerCore/bin/Release/net6.0/NiteAdvServerCore.pdb
+/Users/mac/Projects/NiteAdvServer/NiteAdvServerCore/obj/Release/net6.0/NiteAdvServerCore.csproj.AssemblyReference.cache
+/Users/mac/Projects/NiteAdvServer/NiteAdvServerCore/obj/Release/net6.0/NiteAdvServerCore.GeneratedMSBuildEditorConfig.editorconfig
+/Users/mac/Projects/NiteAdvServer/NiteAdvServerCore/obj/Release/net6.0/NiteAdvServerCore.AssemblyInfoInputs.cache
+/Users/mac/Projects/NiteAdvServer/NiteAdvServerCore/obj/Release/net6.0/NiteAdvServerCore.AssemblyInfo.cs
+/Users/mac/Projects/NiteAdvServer/NiteAdvServerCore/obj/Release/net6.0/NiteAdvServerCore.csproj.CoreCompileInputs.cache
+/Users/mac/Projects/NiteAdvServer/NiteAdvServerCore/obj/Release/net6.0/NiteAdvServerCore.dll
+/Users/mac/Projects/NiteAdvServer/NiteAdvServerCore/obj/Release/net6.0/refint/NiteAdvServerCore.dll
+/Users/mac/Projects/NiteAdvServer/NiteAdvServerCore/obj/Release/net6.0/NiteAdvServerCore.pdb
+/Users/mac/Projects/NiteAdvServer/NiteAdvServerCore/obj/Release/net6.0/ref/NiteAdvServerCore.dll
