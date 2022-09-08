@@ -1102,7 +1102,7 @@ export const snippetCodeMultilangual: snippetCode = {
   `,
   ts: `
   constructor( private _coreTranslationService: CoreTranslationService) {
-    this._coreTranslationService.translate(english, french, german, portuguese);
+    this._coreTranslationService.translate(english, french, german, italian);
   }
 
   /**

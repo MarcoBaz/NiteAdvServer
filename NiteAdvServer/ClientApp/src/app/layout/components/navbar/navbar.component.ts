@@ -11,7 +11,7 @@ import { CoreSidebarService } from '@core/components/core-sidebar/core-sidebar.s
 import { CoreConfigService } from '@core/services/config.service';
 import { CoreMediaService } from '@core/services/media.service';
 
-import { User } from 'app/auth/models';
+import { User } from 'app/main/portal/users/user.model';
 
 import { coreConfig } from 'app/app-config';
 import { Router } from '@angular/router';
@@ -98,9 +98,9 @@ export class NavbarComponent implements OnInit, OnDestroy {
         title: 'German',
         flag: 'de'
       },
-      pt: {
-        title: 'Portuguese',
-        flag: 'pt'
+      it: {
+        title: 'Italian',
+        flag: 'it'
       }
     };
 

@@ -8,6 +8,7 @@ using NiteAdvServerCore.DTO;
 using NiteAdvServerCore.DTO.Token;
 using NiteAdvServerCore.Entities;
 using NiteAdvServerCore.Managers;
+using NiteAdvServerCore.Util;
 
 namespace NiteAdvServer.Controllers
 {
@@ -203,7 +204,7 @@ namespace NiteAdvServer.Controllers
             if (checkAuthentication())
             {
                 var res = BusinessLogic.LoginUser(token.Email,token.Password);
-                return res;
+                return MapperConfigurator.ConvertUser(res);
 
             }
             else

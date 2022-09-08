@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule,APP_INITIALIZER } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -32,7 +32,7 @@ import { BasicCustomContextMenuComponent } from './main/extensions/context-menu/
 import { SubMenuCustomContextMenuComponent } from './main/extensions/context-menu/custom-context-menu/sub-menu-custom-context-menu/sub-menu-custom-context-menu.component';
 import { RestService } from './rest.service';
 import { AppService } from './app.service';
-import { ConfirmComponent} from './main/portal/confirm-dialog/confirm.component';
+import { FacebookModule } from 'ngx-facebook';
 
 const appRoutes: Routes = [
   {
@@ -84,7 +84,7 @@ const appRoutes: Routes = [
   },
   {
     path: '',
-    redirectTo: '/dashboard/ecommerce',
+    redirectTo: '/dashboard',
     pathMatch: 'full'
   },
   {
@@ -124,7 +124,8 @@ const appRoutes: Routes = [
         CoreThemeCustomizerModule,
         CardSnippetModule,
         LayoutModule,
-        ContentHeaderModule
+        ContentHeaderModule,
+        FacebookModule.forRoot()
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

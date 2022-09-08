@@ -1,8 +1,10 @@
-﻿namespace NiteAdvServer.ViewModel
+﻿using System;
+
+namespace NiteAdvServer.ViewModel;
+
+public class FacebookLoginViewModel
 {
-    public class LoginViewModel
-    {
-        public string Login { get; set; }
-        public string Password { get; set; }
-    }
+    public string AccessToken { get; set; }
+    public string UserId { get; set; }
+    public DateTime Expire { get; set; }
 }

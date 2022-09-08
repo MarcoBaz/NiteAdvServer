@@ -16,7 +16,7 @@ export class CompanyFormComponent implements OnInit {
   public title:string;
   public contentMessage:string;
   showCancel:boolean;
-  callback:any;
+  callback: () => void;
   company: Company;
   companyForm: FormGroup;
   modalReference: any;
@@ -33,7 +33,8 @@ export class CompanyFormComponent implements OnInit {
   // Public Methods
   // -----------------------------------------------------------------------------------------------------
 
-  openDialog( company): void {
+  openDialog(company, callback): void {
+    this.callback =callback;
     this.company = company;
     this.companyForm = this.createCompanyForm();
     this.modalOpen();
@@ -95,6 +96,9 @@ export class CompanyFormComponent implements OnInit {
   //alert('groupData:' + groupData);
   //uploadData.append('User', groupData);
   //this.userForm.FileUpload = this.fileToUpload;
+  this.callback();
   this.modalReference.close();
 }
 }
+
+

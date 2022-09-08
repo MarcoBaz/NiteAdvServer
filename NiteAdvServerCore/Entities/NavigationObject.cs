@@ -8,13 +8,17 @@ namespace NiteAdvServerCore.Entities
 {
     internal class NavigationObject:VertexEntity
     {
+        public NavigationObject(string id, string label= "edge") : base(id, label)
+        {
+        }
+
         public string type { get; set; }
         public string inVLabel { get; set; }
         public string outVLabel { get; set; }
         public string inV { get; set; }
         public string outV { get; set; }
 
-        public override string label => "edge";
+        //public override string label => "edge";
     }
 
     // "id": "83b59118-4926-40cd-99e1-ca59393d69e8",

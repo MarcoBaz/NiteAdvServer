@@ -83,8 +83,9 @@ export class CompaniesService implements Resolve<any> {
       this._rest.SaveCompany(company).subscribe((response: any) => {
 
         if (response.Error == '') {
-          var cmp = response.data;
-          this.CompanyResponse.CompanyList[cmp.id] = cmp
+          var cmp = response.Data;
+          let index = this.CompanyResponse.CompanyList.findIndex(item => item.id == cmp.id);
+          this.CompanyResponse.CompanyList[index] = cmp;
           this.onDatatablessChanged.next(this.CompanyResponse);
           resolve(response);
         }

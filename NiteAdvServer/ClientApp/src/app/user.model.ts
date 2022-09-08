@@ -39,3 +39,15 @@ export class LoginViewModel {
     }
     
 }
+
+export class FacebookLoginViewModel {
+    AccessToken:string;
+    Expire: Date;
+    UserId:string
+    constructor(accessToken,expire,userID) {
+        this.AccessToken= accessToken||'';
+        this.Expire = expire || new Date();
+        this.UserId = userID||'';
+    }
+    
+}

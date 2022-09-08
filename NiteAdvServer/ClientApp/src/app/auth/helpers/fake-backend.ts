@@ -17,19 +17,19 @@ import {
 } from '@angular/common/http';
 import { Observable, of, throwError } from 'rxjs';
 import { delay, mergeMap, materialize, dematerialize } from 'rxjs/operators';
-
-import { User, Role } from 'app/auth/models';
+import { User } from 'app/main/portal/users/user.model';
+//import { User, Role } from 'app/auth/models';
 
 // Users with role
 const users: User[] = [
-  {
-    id: 1,
-    email: 'admin@demo.com',
-    password: 'admin',
-    firstName: 'John',
-    lastName: 'Doe',
-    avatar: 'avatar-s-11.jpg',
-    role: Role.Admin
+  /*{
+    id: '1',
+    Email: 'admin@demo.com',
+    Password: 'admin',
+    Name: 'John',
+    Surename: 'Doe',
+    UserImageLink: 'avatar-s-11.jpg',
+    IsAdmin: true
   },
   {
     id: 2,
@@ -48,7 +48,7 @@ const users: User[] = [
     lastName: 'Doe',
     avatar: 'avatar-s-3.jpg',
     role: Role.User
-  }
+  }*/
 ];
 
 @Injectable()
@@ -80,15 +80,14 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
     function authenticate() {
       const { email, password } = body;
-      const user = users.find(x => x.email === email && x.password === password);
+      const user = users.find(x => x.Email === email && x.Password === password);
       if (!user) return error('Username or password is incorrect');
       return ok({
         id: user.id,
-        email: user.email,
-        firstName: user.firstName,
-        lastName: user.lastName,
-        avatar: user.avatar,
-        role: user.role,
+        email: user.Email,
+        firstName: user.Name,
+        lastName: user.Surename,
+        avatar: user.UserImageLink,
         token: `fake-jwt-token.${user.id}`
       });
     }
@@ -102,9 +101,9 @@ export class FakeBackendInterceptor implements HttpInterceptor {
       if (!isLoggedIn()) return unauthorized();
 
       // only admins can access other user records
-      if (!isAdmin() && currentUser().id !== idFromUrl()) return unauthorized();
+      if (!isAdmin() && currentUser().id !== idFromUrl().toString()) return unauthorized();
 
-      const user = users.find(x => x.id === idFromUrl());
+      const user = users.find(x => x.id === idFromUrl().toString());
       return ok(user);
     }
 
@@ -128,18 +127,18 @@ export class FakeBackendInterceptor implements HttpInterceptor {
     }
 
     function isAdmin() {
-      return isLoggedIn() && currentUser().role === Role.Admin;
+      return isLoggedIn() && currentUser().IsAdmin;
     }
 
     function currentUser() {
       if (!isLoggedIn()) return;
-      const id = parseInt(headers.get('Authorization').split('.')[1]);
+      const id = headers.get('Authorization').split('.')[1];
       return users.find(x => x.id === id);
     }
 
     function idFromUrl() {
       const urlParts = url.split('/');
-      return parseInt(urlParts[urlParts.length - 1]);
+      return urlParts[urlParts.length - 1];
     }
   }
 }

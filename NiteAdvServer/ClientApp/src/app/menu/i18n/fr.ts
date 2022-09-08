@@ -3,7 +3,7 @@ export const locale = {
   data: {
     MENU: {
       DASHBOARD: {
-        COLLAPSIBLE: 'Tableaux de bord',
+        COLLAPSIBLE: 'Dashboard',
         BADGE: '2',
         ANALYTICS: 'Analytique',
         ECOMMERCE: 'commerce électronique'
@@ -11,6 +11,7 @@ export const locale = {
       APPS: {
         EVENTS: 'Events',
         COMPANIES: 'Companies',
+        USERS: 'Users',
         SECTION: 'Applications et pages',
         EMAIL: 'E-mail',
         CHAT: 'Discuter',

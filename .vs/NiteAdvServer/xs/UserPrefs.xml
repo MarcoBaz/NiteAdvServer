@@ -1,43 +1,63 @@
-﻿<Properties StartupConfiguration="{5A17BC6F-F09E-4D94-BB36-3E1CF1B5CD25}|Default">
-  <MonoDevelop.Ide.ItemProperties.NiteAdvServer PreferredExecutionTarget="/Applications/Safari.app" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="NiteAdvServerCore/Managers/SqlServerManager.cs">
+﻿<Properties StartupConfiguration="{79474FA2-A158-48F0-AA69-61A7E940F600}|Default">
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore>
+      <Breakpoint file="/Users/mac/Projects/NiteAdvServer/NiteAdvServerCore/Managers/CosmosManager.cs" relfile="NiteAdvServerCore/Managers/CosmosManager.cs" line="184" column="1" />
+      <Breakpoint file="/Users/mac/Projects/NiteAdvServer/NiteAdvServerCore/Managers/BusinessLogic.cs" relfile="NiteAdvServerCore/Managers/BusinessLogic.cs" line="210" column="1" />
+      <Breakpoint file="/Users/mac/Projects/NiteAdvServer/NiteAdvServerCore/Util/Converter.cs" relfile="NiteAdvServerCore/Util/Converter.cs" line="16" column="1" />
+      <Breakpoint file="/Users/mac/Projects/NiteAdvServer/NiteAdvServer/Controllers/WebController.cs" relfile="NiteAdvServer/Controllers/WebController.cs" line="77" column="1" />
+      <Breakpoint file="/Users/mac/Projects/NiteAdvServer/NiteAdvServerCore/Managers/GremlinManager.cs" relfile="NiteAdvServerCore/Managers/GremlinManager.cs" line="172" column="1" />
+      <Breakpoint file="/Users/mac/Projects/NiteAdvServer/NiteAdvServerCore/Managers/BusinessLogic.cs" relfile="NiteAdvServerCore/Managers/BusinessLogic.cs" line="407" column="1" />
+    </BreakpointStore>
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.Workbench ActiveDocument="NiteAdvServerCore/Entities/Event.cs">
     <Files>
-      <File FileName="NiteAdvServer/Controllers/ApiController.cs" Line="50" Column="48" />
-      <File FileName="NiteAdvServerCore/Class1.cs" Line="1" Column="1" />
-      <File FileName="NiteAdvServerCore/DTO/BaseDTO.cs" Line="1" Column="1" />
-      <File FileName="NiteAdvServerCore/Managers/GoogleMapsApiService.cs" Line="1" Column="1" />
-      <File FileName="NiteAdvServerCore/Managers/BusinessLogic.cs" Line="1" Column="1" />
-      <File FileName="NiteAdvServerCore/Managers/MailManager.cs" Line="5" Column="14" />
-      <File FileName="NiteAdvServerCore/Managers/Logger.cs" Line="1" Column="1" />
-      <File FileName="NiteAdvServerCore/Managers/PushNotificationManager.cs" Line="1" Column="20" />
-      <File FileName="NiteAdvServerCore/Managers/SMSManager.cs" Line="6" Column="13" />
-      <File FileName="NiteAdvServerCore/Managers/SqlServerManager.cs" Line="27" Column="3" />
-      <File FileName="NiteAdvServer/Controllers/WeatherForecastController.cs" Line="16" Column="47" />
-      <File FileName="NiteAdvServer/appsettings.json" Line="1" Column="1" />
-      <File FileName="NiteAdvServer/appsettings.Development.json" Line="1" Column="1" />
-      <File FileName="NiteAdvServer/Properties/launchSettings.json" Line="1" Column="1" />
-      <File FileName="NiteAdvServer/Properties/PublishProfiles/NiteAdvisorService - Zip Deploy.pubxml" Line="1" Column="1" />
+      <File FileName="NiteAdvServer/Controllers/WebController.cs" Line="202" Column="39" IsPinned="True" />
+      <File FileName="NiteAdvServerCore/Managers/BusinessLogic.cs" Line="407" Column="1" IsPinned="True" />
+      <File FileName="NiteAdvServerCore/Managers/GremlinManager.cs" Line="172" Column="1" IsPinned="True" />
+      <File FileName="NiteAdvServerCore/Managers/FacebookManager.cs" Line="57" Column="1" />
+      <File FileName="NiteAdvServerCore/Entities/VertexEntity.cs" Line="18" Column="22" />
+      <File FileName="NiteAdvServerCore/Managers/CosmosManager.cs" Line="59" Column="33" />
+      <File FileName="NiteAdvServerCore/DTO/EventDTO.cs" Line="1" Column="1" />
+      <File FileName="NiteAdvServerCore/DTO/UserDTO.cs" Line="1" Column="1" />
+      <File FileName="NiteAdvServer/ViewModel/FacebookLoginViewModel.cs" Line="1" Column="1" />
+      <File FileName="NiteAdvServer/Controllers/ApiController.cs" Line="194" Column="1" />
+      <File FileName="NiteAdvServerCore/Generic/EventsViewModel.cs" Line="11" Column="1" />
+      <File FileName="NiteAdvServerCore/Generic/EventsResponse.cs" Line="11" Column="39" />
+      <File FileName="NiteAdvServerCore/Generic/FilterCompany.cs" Line="12" Column="38" />
+      <File FileName="NiteAdvServerCore/Generic/UserResponse.cs" Line="17" Column="43" />
+      <File FileName="NiteAdvServerCore/Entities/Event.cs" Line="40" Column="85" />
+      <File FileName="NiteAdvServerCore/Util/MapperConfigurator.cs" Line="95" Column="46" />
+      <File FileName="NiteAdvServerCore/Entities/User.cs" Line="33" Column="70" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="NiteAdvServer" expanded="True">
-            <Node name="NiteAdvServer" expanded="True" selected="True" />
+            <Node name="NiteAdvServer" expanded="True">
+              <Node name="Controllers" expanded="True" />
+              <Node name="ViewModel" expanded="True" />
+            </Node>
             <Node name="NiteAdvServerCore" expanded="True">
+              <Node name="DTO" expanded="True" />
+              <Node name="Entities" expanded="True">
+                <Node name="Event.cs" selected="True" />
+              </Node>
+              <Node name="Generic" expanded="True" />
               <Node name="Managers" expanded="True" />
+              <Node name="Util" expanded="True" />
             </Node>
           </Node>
         </State>
       </Pad>
       <Pad Id="MonoDevelop.Debugger.WatchPad">
-        <State />
+        <State>
+          <Value>fieldInfo</Value>
+        </State>
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
-  </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.NiteAdvServer PreferredExecutionTarget="/Applications/Safari.app" />
 </Properties>

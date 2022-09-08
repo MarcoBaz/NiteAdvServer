@@ -457,7 +457,7 @@ export const snippetCodeReactiveForms: snippetCode = {
             <option selected value="English">English</option>
             <option value="Germany">Germany</option>
             <option value="French">French</option>
-            <option value="Portuguese">Portuguese</option>
+            <option value="italian">italian</option>
           </select>
           <div *ngIf="submitted && ReactiveUDForm.language.errors" class="invalid-feedback">
             <div *ngIf="ReactiveUDForm.language.errors.required">language is required</div>

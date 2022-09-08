@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Facebook;
 using NiteAdvServerCore.DTO;
 using NiteAdvServerCore.DTO.Token;
 using NiteAdvServerCore.Entities;
@@ -176,7 +177,7 @@ public static class BusinessLogic
 
             //DateTime startDate = new DateTime(1970, 1, 1, 0, 0, 0);
             var milliseconds = ServerUtil.GetUnixFormatDateTime(token.LastSyncDate);
-            var syncResult = GremlinManager.Instance.RetreiveData<Company>($"g.V().hasLabel('company').has('LastSyncDate',gt({milliseconds}))");
+            var syncResult = GremlinManager.Instance.RetreiveData<Company>($"g.V().hasLabel('company').has('LastSyncDate',gt({milliseconds}))").Result;
             if (syncResult != null && syncResult.Any())
             {
                 syncResult.ForEach(x =>
@@ -213,10 +214,10 @@ public static class BusinessLogic
                     // The vertex results are formed as Dictionaries with a nested dictionary for their properties
                     Dictionary<string, object> list = (Dictionary<string, object>)res;
                     //IEnumerable<KeyValuePair<string, object>> valueList = (IEnumerable<KeyValuePair<string, object>>)list.Values.ToList()[0];
-                    var Event = GremlinManager.Instance.CreateIstance<Event>((IEnumerable<KeyValuePair<string, object>>)list.Values.ToList()[0]);
-                    var Company = GremlinManager.Instance.CreateIstance<Company>((IEnumerable<KeyValuePair<string, object>>)list.Values.ToList()[1]);
-                    var dto = MapperConfigurator.ConvertEvent(Event, Company.id);
-                    result.EventDTOList.Add(dto);
+                    //var Event = GremlinManager.Instance.CreateIstance<Event>((IEnumerable<KeyValuePair<string, object>>)list.Values.ToList()[0]);
+                    //var Company = GremlinManager.Instance.CreateIstance<Company>((IEnumerable<KeyValuePair<string, object>>)list.Values.ToList()[1]);
+                    //var dto = MapperConfigurator.ConvertEvent(Event, Company.id);
+                    //result.EventDTOList.Add(dto);
 
                 }
             }
@@ -235,7 +236,7 @@ public static class BusinessLogic
         UserDTO result = new UserDTO();
         try
         {
-            var syncResult = GremlinManager.Instance.RetreiveData<User>($"g.V().hasLabel('user').has('Email','{usDTO.Email}')");
+            var syncResult = GremlinManager.Instance.RetreiveData<User>($"g.V().hasLabel('user').has('Email','{usDTO.Email}')").Result;
             if (syncResult != null && syncResult.Any())
                 throw new Exception("User already exists");
             else
@@ -256,56 +257,178 @@ public static class BusinessLogic
         }
         return result;
     }
-    public static UserDTO LoginUser(string email, string password)
+    public static User LoginUser(string email, string password)
     {
-        UserDTO result = new UserDTO();
-        try
-        {
-            var syncResult = GremlinManager.Instance.RetreiveData<User>($"g.V().hasLabel('user').has('Email','{email.ToLower()}').has('Password','{password}')");
+        User result = null;
+          var syncResult = GremlinManager.Instance.RetreiveData<User>($"g.V().hasLabel('user').has('Email','{email.ToLower()}').has('Password','{password}')").Result;
             if (syncResult != null && syncResult.Any())
             {
-                var us = syncResult.First();
-                result = MapperConfigurator.ConvertUser(us);
+            result = syncResult.First();
+             
             }
             else
                 throw new Exception("User null");
 
-            result.ActionResult = 200;
-        }
-        catch (Exception ex)
-        {
-            result.ActionResult = 400;
-            result.ActionError = ex.Message;
-        }
+        
         return result;
     }
     #endregion
 
     #region Web
 
-    public static CompanyResponse GetCompaniesList(FilterCompany filter)
+    public static async Task<CompanyResponse> GetCompaniesList(FilterCompany filter)
     {
         CompanyResponse result = new CompanyResponse();
         int startIndex = filter.PageSize * filter.Offset;
         int endIndex = startIndex + filter.PageSize;
-        string query = $"g.V().hasLabel('company').range({startIndex},{endIndex})";
+        string query = $"g.V().hasLabel('company')";
         if (!String.IsNullOrWhiteSpace(filter.Where))
         {
-
+            query += $".or(__.has('Name', containing('{filter.Where}')), __.has('Street', containing('{filter.Where}')))";
         }
-        var items =  GremlinManager.Instance.RetreiveData<Company>(query);
+        string queryCount = query + ".count()";
+        query += $".range({startIndex},{endIndex})";
+        var items = await GremlinManager.Instance.RetreiveData<Company>(query);
         if (items != null && items.Any())
         {
             result.CompanyList.AddRange(items);
-            int count = (int) GremlinManager.Instance.Count("g.V().hasLabel('company').count()");
+            int count = (int)GremlinManager.Instance.Count(queryCount);
             result.ItemsCount = count;
         }
         return result;
     }
+    /*  public static async Task<CompanyResponse> GetCompaniesList(FilterCompany filter)
+      {
+          CompanyResponse result = new CompanyResponse();
+          int startIndex = filter.PageSize * filter.Offset;
+
+          string query = String.Empty;
+          if (!String.IsNullOrWhiteSpace(filter.Where))
+          {
+              query = $"Name Like '%{filter.Where}%'";
+          }
+          var items = await CosmosManager.Instance.RetreiveData<Company>(query,startIndex,filter.PageSize);
+          if (items != null && items.Any())
+          {
+              result.CompanyList.AddRange(items);
+              int count = (int) await CosmosManager.Instance.Count<Company>(query);
+              result.ItemsCount = count;
+          }
+          return result;
+      }*/
 
     public static Company SaveCompany(Company company)
     {
         return GremlinManager.Instance.SaveVertex<Company>(company);
     }
+
+    public static async Task<UserResponse> GetUsersList(FilterUser filter)
+    {
+        UserResponse result = new UserResponse();
+        int startIndex = filter.PageSize * filter.Offset;
+        int endIndex = startIndex + filter.PageSize;
+        string query = $"g.V().hasLabel('user').range({startIndex},{endIndex})";
+        if (!String.IsNullOrWhiteSpace(filter.Where))
+        {
+
+        }
+        var items = await GremlinManager.Instance.RetreiveData<User>(query);
+        if (items != null && items.Any())
+        {
+            result.UserList.AddRange(items);
+            int count = (int)GremlinManager.Instance.Count("g.V().hasLabel('user').count()");
+            result.ItemsCount = count;
+        }
+        return result;
+    }
+
+    public static User SaveUser(User user)
+    {
+        return GremlinManager.Instance.SaveVertex<User>(user);
+    }
+
+    public static User LoginFacebook(string accessToken, string userID)
+    {
+        User result = null;
+
+        var fbUser = FacebookManager.Instance.GetUserData(accessToken, userID);
+        if (fbUser == null)
+            throw new Exception("User Facebook null");
+        //  dynamic parameters = new ExpandoObject();
+        //parameters.message = txtSearch;
+        // dynamic resultCall = fb.Get("search?q=Milan&fields=name,location,link", parameters);
+        var userResult = GremlinManager.Instance.RetreiveData<User>($"g.V().hasLabel('user').has('id','{fbUser.id.ToLower()}')").Result;
+        if (userResult != null && userResult.Any())
+        {
+            result = userResult.First();
+        }
+        else
+        {
+            //insert user
+            fbUser.Disabled = false;
+            fbUser.RegistrationDate = ServerUtil.GetUnixFormatDateTime(DateTime.UtcNow,TimestampFormatter.Seconds);
+            fbUser.UserActivated = true;
+            fbUser.FromFacebook = true;
+            result = GremlinManager.Instance.SaveVertex<User>(fbUser, true);
+            // claim del locale
+          
+        }
+
+        var navEdge = GremlinManager.Instance.RetreiveData<User>($"g.V('{result.id}').out('has_claimed')").Result;
+        if (navEdge == null || !navEdge.Any())
+        {
+            var companyResult = GremlinManager.Instance.RetreiveData<User>($"g.V().hasLabel('company').has('id','{result.id.ToLower()}')").Result;
+            if (companyResult != null && companyResult.Any())
+            {
+                // verifico che non siano state già inseriti gli edge
+
+
+                var cmp = companyResult.First();
+                GremlinManager.Instance.AddEdge(result.id, cmp.id, "has_claimed");
+                GremlinManager.Instance.AddEdge(cmp.id, result.id, "claims");
+            }
+        }
+
+        return result;
+    }
+
+    public static async Task<EventsResponse> GetEventsList(EventsViewModel viewModel)
+    {
+        EventsResponse result = new EventsResponse();
+        string query = $"g.V().hasLabel('user').has('id', '{viewModel.IdUser}').out('has_claimed').out('organizes')";
+        var items = await GremlinManager.Instance.RetreiveData<Event>(query);
+        if (items != null && items.Any())
+        {
+            result.EventsList.AddRange(items);
+            result.ItemsCount = items.Count;
+        }
+        return result;
+    }
+    //https://developers.facebook.com/products/official-events-api/
+    public async static Task<Event> SaveEvent(EventSaveViewModel evenVM)
+    {
+        //return FacebookManager.Instance.SaveEvent(even);
+        //return GremlinManager.Instance.SaveVertex<Event>(even);
+        Event result = null;
+        string query = $"g.V().hasLabel('user').has('id', '{evenVM.IdUser}').out('has_claimed')";
+        var companies = await GremlinManager.Instance.RetreiveData<Company>(query);
+        if (companies != null && companies.Any())
+        {
+            var company = companies[0];
+            if (string.IsNullOrWhiteSpace(evenVM.Event.id))
+                evenVM.Event.id = Guid.NewGuid().ToString();
+
+            evenVM.Event.LastSyncDate = ServerUtil.GetUnixFormatDateTime(DateTime.UtcNow);
+            result = GremlinManager.Instance.SaveVertex<Event>(evenVM.Event);
+            GremlinManager.Instance.AddEdge(result.id, company.id, "organized_by");
+            GremlinManager.Instance.AddEdge(company.id, result.id, "organizes");
+        }
+        else throw new Exception("Cannot find the company");
+
+         return result;
+    }
+
     #endregion
 }
+
+

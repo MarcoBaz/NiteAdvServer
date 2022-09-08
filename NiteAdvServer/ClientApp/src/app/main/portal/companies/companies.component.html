@@ -42,6 +42,7 @@
                 >Search<input
                   type="search"
                   placeholder="Search"
+                  [(ngModel)]="filter.Where"
                   class="form-control ml-25"
                   (keyup)="filterUpdate($event)"
                   (search)="filterUpdate($event)"

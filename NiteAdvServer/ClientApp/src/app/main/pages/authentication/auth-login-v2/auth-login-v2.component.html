@@ -1,9 +1,10 @@
 <div class="auth-wrapper auth-v2">
+  <confirm-modal #confirm></confirm-modal>
   <div class="auth-inner row m-0">
-    <!-- Brand logo--><a class="brand-logo" href="javascript:void(0);">
-      <img src="{{ coreConfig.app.appLogoImage }}" alt="brand-logo" height="28" />
-      <h2 class="brand-text text-primary ml-1">{{ coreConfig.app.appName }}</h2></a
-    >
+    <!-- Brand logo {{ coreConfig.app.appLogoImage }}--><a class="brand-logo" href="javascript:void(0);">
+      <img src="assets/images/logo/logobig.png" alt="brand-logo" height="28" />
+      <!-- <h2 class="brand-text text-primary ml-1">{{ coreConfig.app.appName }}</h2>-->
+      </a>
     <!-- /Brand logo-->
     <!-- Left Text-->
     <div class="d-none d-lg-flex col-lg-8 align-items-center p-5">
@@ -23,9 +24,9 @@
     <!-- Login-->
     <div class="d-flex col-lg-4 align-items-center auth-bg px-2 p-lg-5">
       <div class="col-12 col-sm-8 col-md-6 col-lg-12 px-xl-2 mx-auto">
-        <h2 class="card-title font-weight-bold mb-1">Welcome to Vuexy! 👋</h2>
-        <p class="card-text mb-2">Please sign-in to your account and start the adventure</p>
-        <ngb-alert [type]="'primary'" [dismissible]="false">
+        <h2 class="card-title font-weight-bold mb-1">Backoffice</h2>
+        <p class="card-text mb-2">Please sign-in to your account to administer your data</p>
+        <!-- <ngb-alert [type]="'primary'" [dismissible]="false">
           <div class="alert-body font-small-2">
             <p>
               <small class="mr-50"><span class="font-weight-bold">Admin:</span> admin@demo.com | admin</small>
@@ -39,7 +40,7 @@
             placement="left"
             ngbTooltip="This is just for role based JWT authorization demo purpose"
           ></span>
-        </ngb-alert>
+        </ngb-alert> -->
 
         <ngb-alert [type]="'danger'" [dismissible]="false" *ngIf="error">
           <div class="alert-body">
@@ -119,10 +120,13 @@
           <div class="divider-text">or</div>
         </div>
         <div class="auth-footer-btn d-flex justify-content-center">
-          <a class="btn btn-facebook" href="javascript:void(0)"><i data-feather="facebook"></i></a
+          <button [disabled]="loading" (click)="signInWithFB()" class="btn  btn-facebook btn-block" tabindex="5" rippleEffect style="height:38px !important;">
+            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>Login with Facebook
+          </button>
+          <!-- <a class="btn btn-facebook" href="javascript:void(0)"><i data-feather="facebook"></i></a
           ><a class="btn btn-twitter white" href="javascript:void(0)"><i data-feather="twitter"></i></a
           ><a class="btn btn-google" href="javascript:void(0)"><i data-feather="mail"></i></a
-          ><a class="btn btn-github" href="javascript:void(0)"><i data-feather="github"></i></a>
+          ><a class="btn btn-github" href="javascript:void(0)"><i data-feather="github"></i></a> -->
         </div>
       </div>
     </div>

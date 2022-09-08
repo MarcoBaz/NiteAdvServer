@@ -3,13 +3,14 @@ export const locale = {
   data: {
     MENU: {
       DASHBOARD: {
-        COLLAPSIBLE: 'Dashboards',
+        COLLAPSIBLE: 'Dashboard',
         BADGE: '2',
         ANALYTICS: 'Analytik',
         ECOMMERCE: 'E-Commerce'
       },
       APPS: {
         EVENTS: 'Events',
+        USERS: 'Users',
         COMPANIES: 'Companies',
         SECTION: 'Apps & Seiten',
         EMAIL: 'Email',

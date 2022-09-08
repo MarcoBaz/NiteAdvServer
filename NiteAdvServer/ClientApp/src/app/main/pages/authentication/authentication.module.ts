@@ -18,7 +18,7 @@ import { AuthRegisterV2Component } from 'app/main/pages/authentication/auth-regi
 
 import { AuthResetPasswordV1Component } from 'app/main/pages/authentication/auth-reset-password-v1/auth-reset-password-v1.component';
 import { AuthResetPasswordV2Component } from 'app/main/pages/authentication/auth-reset-password-v2/auth-reset-password-v2.component';
-
+import { ConfirmModule } from 'app/main/portal/confirm-dialog/confirm.module';
 // routing
 const routes: Routes = [
   {
@@ -66,6 +66,6 @@ const routes: Routes = [
     AuthResetPasswordV1Component,
     AuthResetPasswordV2Component
   ],
-  imports: [CommonModule, RouterModule.forChild(routes), NgbModule, FormsModule, ReactiveFormsModule, CoreCommonModule]
+  imports: [CommonModule, RouterModule.forChild(routes), NgbModule, FormsModule, ReactiveFormsModule, CoreCommonModule,ConfirmModule]
 })
 export class AuthenticationModule {}

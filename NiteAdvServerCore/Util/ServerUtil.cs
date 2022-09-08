@@ -29,5 +29,15 @@ namespace NiteAdvServerCore.Util
                 myDate = dt.AddSeconds(unixDate).ToLocalTime();
             return myDate;
         }
+
+        public static bool IsUserAdmin(string email)
+        {
+            List<string> adminEmail = new List<string>() { "admin@demo.com", "marco_bazzoli@virgilio.it" };
+            var user = adminEmail.Where(x => x.Equals(email.ToLower())).FirstOrDefault();
+            if (string.IsNullOrWhiteSpace(user))
+                return false;
+            else
+                return true;
+        }
     }
 }

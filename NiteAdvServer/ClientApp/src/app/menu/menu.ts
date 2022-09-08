@@ -8,15 +8,16 @@ export const menu: CoreMenu[] = [
     id: 'dashboard',
     title: 'Dashboard',
     translate: 'MENU.DASHBOARD.COLLAPSIBLE',
-    type: 'collapsible',
+    type: 'item',
     // role: ['Admin'], //? To hide collapsible based on user role
     icon: 'home',
-    badge: {
-      title: '2',
-      translate: 'MENU.DASHBOARD.BADGE',
-      classes: 'badge-light-warning badge-pill'
-    },
-    children: [
+    url: 'dashboard'
+    // badge: {
+    //   title: '2',
+    //   translate: 'MENU.DASHBOARD.BADGE',
+    //   classes: 'badge-light-warning badge-pill'
+    // },
+   /* children: [
       {
         id: 'analytics',
         title: 'Analytics',
@@ -35,7 +36,7 @@ export const menu: CoreMenu[] = [
         icon: 'circle',
         url: 'dashboard/ecommerce'
       }
-    ]
+    ]*/
   },
   //Nite Advisor
   {
@@ -50,7 +51,7 @@ export const menu: CoreMenu[] = [
         title: 'Events',
         translate: 'MENU.APPS.EVENTS',
         type: 'item',
-        icon: 'mail',
+        icon: 'calendar',
         url: 'portal/events'
       },
       {
@@ -58,13 +59,29 @@ export const menu: CoreMenu[] = [
         title: 'Companies',
         translate: 'MENU.APPS.COMPANIES',
         type: 'item',
-        icon: 'mail',
+        icon: 'check-square',
         url: 'portal/companies'
-      }
+      },
+      {
+        id: 'users',
+        title: 'Users',
+        translate: 'MENU.APPS.USERS',
+        type: 'item',
+        icon: 'user',
+        url: 'portal/users'
+      },
+      {
+        id: 'chat',
+        title: 'Chat',
+        translate: 'MENU.APPS.CHAT',
+        type: 'item',
+        icon: 'message-square',
+        url: 'apps/chat'
+      },
     ]
   },
   // Apps & Pages
-  {
+ /* {
     id: 'apps',
     type: 'section',
     title: 'Apps & Pages',
@@ -1221,5 +1238,5 @@ export const menu: CoreMenu[] = [
         openInNewTab: true
       }
     ]
-  }
+  }*/
 ];

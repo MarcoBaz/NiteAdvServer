@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace NiteAdvServerCore.Generic
 {
-    public class CompanyResponse
+    public class UserResponse
     {
-        public CompanyResponse()
+        public UserResponse()
         {
-            CompanyList = new List<Company>();
+            UserList = new List<User>();
         }
-       public List<Company> CompanyList { get; set; }
+       public List<User> UserList { get; set; }
        public int ItemsCount { get; set; }
     }
 }

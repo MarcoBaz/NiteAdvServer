@@ -9,7 +9,7 @@ import { CoreTranslationService } from '@core/services/translation.service';
 import { locale as german } from 'app/main/tables/datatables/i18n/de';
 import { locale as english } from 'app/main/tables/datatables/i18n/en';
 import { locale as french } from 'app/main/tables/datatables/i18n/fr';
-import { locale as portuguese } from 'app/main/tables/datatables/i18n/pt';
+import { locale as italian } from 'app/main/tables/datatables/i18n/it';
 
 import * as snippet from 'app/main/tables/datatables/datatables.snippetcode';
 
@@ -175,7 +175,7 @@ export class DatatablesComponent implements OnInit {
    */
   constructor(private _datatablesService: DatatablesService, private _coreTranslationService: CoreTranslationService) {
     this._unsubscribeAll = new Subject();
-    this._coreTranslationService.translate(english, french, german, portuguese);
+    this._coreTranslationService.translate(english, french, german, italian);
   }
 
   // Lifecycle Hooks

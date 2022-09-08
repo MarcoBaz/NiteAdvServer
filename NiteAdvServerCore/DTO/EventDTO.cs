@@ -16,5 +16,15 @@ namespace NiteAdvServerCore.DTO
 
         public string ImageLink { get; set; }
         public string CompanyId { get; set; }
+        public double Latitude { get; set; }
+        public double Longitude { get; set; }
+        public string CategoryType { get; set; }
+        public string DiscoveryCategories { get; set; }
+        public string Place { get; set; }
+        public string TicketingContext { get; set; }
+        public string TicketUrl { get; set; }
+        public double UsersGoing { get; set; }
+        public double UsersInterested { get; set; }
+        public bool AllDay { get; set; }
     }
 }

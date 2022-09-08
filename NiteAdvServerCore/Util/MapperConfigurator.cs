@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace NiteAdvServerCore.Util
 {
@@ -59,7 +60,7 @@ namespace NiteAdvServerCore.Util
         public static CompanyDTO ConvertCompany(Company cmp)
         {
             CompanyDTO dto = new CompanyDTO();
-            dto.OriginalId = cmp.id;
+            dto.OriginalId = (string) cmp.id;
             dto.Name = cmp.Name;
             dto.Url = cmp.Url;
             dto.Label = cmp.label;
@@ -87,7 +88,7 @@ namespace NiteAdvServerCore.Util
         public static EventDTO ConvertEvent(Event eve, string CompanyId)
         {
             EventDTO dto = new EventDTO();
-            dto.OriginalId = eve.id;
+            dto.OriginalId = (string) eve.id;
             dto.Url = eve.Url;
             dto.Label = eve.label;
             dto.Name = eve.Name;
@@ -95,17 +96,24 @@ namespace NiteAdvServerCore.Util
             dto.StartDate = ServerUtil.GetDateTimeFromUnixFormat(eve.StartTimestamp,TimestampFormatter.Seconds);
             dto.EndDate = ServerUtil.GetDateTimeFromUnixFormat(eve.EndTimestamp,TimestampFormatter.Seconds);
             dto.ImageLink = eve.Image;
-            dto.Label = eve.label;
             dto.LastSyncDate = ConvertLastSyncDate<Event>(eve);
             dto.CompanyId = CompanyId;
-            
+            dto.Latitude = eve.Latitude;
+            dto.Longitude = eve.Longitude;
+            dto.CategoryType = eve.CategoryType;
+            dto.DiscoveryCategories = eve.DiscoveryCategories;
+            dto.Place = eve.Place;
+            dto.TicketingContext = eve.TicketingContext;
+            dto.TicketUrl = eve.TicketUrl;
+            dto.UsersGoing = eve.UsersGoing;
+            dto.UsersInterested = eve.UsersInterested;
+
             return dto;
 
         }
         public static User ConvertUserDTO(UserDTO usDTO)
         {
-            User dto = new User();
-            dto.id = usDTO.OriginalId;
+            User dto = new User(usDTO.OriginalId);
             dto.Email = usDTO.Email;
             dto.Name = usDTO.Name;
             dto.Surename = usDTO.Surename;
@@ -125,7 +133,7 @@ namespace NiteAdvServerCore.Util
         public static UserDTO ConvertUser(User us)
         {
             UserDTO dto = new UserDTO();
-            dto.OriginalId = us.id;
+            dto.OriginalId = (string) us.id;
             dto.Email = us.Email;
             dto.Name = us.Name;
             dto.Surename = us.Surename;

@@ -10,7 +10,9 @@ namespace NiteAdvServerCore.Entities
 {
     public class Company :VertexEntity
     {
-       public Company()
+        public Company() : base("", "company")
+        { }
+        public Company(string id) : base(id, "company")
         { }
         public string? Url { get; set; }
         public string? Name { get; set; }
@@ -24,7 +26,7 @@ namespace NiteAdvServerCore.Entities
         public string? GooglePlaceId { get; set; }
         public string? Type { get; set; }
         public string? GoogleTypes { get; set; }
-        public double  Rating { get; set; }
+        public double Rating { get; set; }
         public string? Reviews { get; set; }
         public string? GoogleUrl { get; set; }
         public string? WebSite { get; set; }
@@ -32,12 +34,9 @@ namespace NiteAdvServerCore.Entities
         public string? Phone { get; set; }
         public string? OpeningHours { get; set; }
         public double RatingTotal { get; set; }
-        [JsonIgnore]
-        public override string label { get => "company"; }
-       
-
-
+ 
     }
+   
 }
 
 

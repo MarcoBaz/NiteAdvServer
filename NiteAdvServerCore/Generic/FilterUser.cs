@@ -2,13 +2,12 @@
 
 namespace NiteAdvServerCore.Generic;
 
-public class FilterCompany
+public class FilterUser
 {
-    public FilterCompany()
+    public FilterUser()
     {
         Where = "";
     }
-    public int IdCompany { get; set; }
     public int PageSize { get; set; }
     public int TotalItems { get; set; }
     public int Offset { get; set; }

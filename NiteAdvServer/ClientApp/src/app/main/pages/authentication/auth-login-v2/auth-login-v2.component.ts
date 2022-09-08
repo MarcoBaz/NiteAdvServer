@@ -1,11 +1,15 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { takeUntil, first } from 'rxjs/operators';
 import { Subject } from 'rxjs';
-import {AppService} from 'app/app.service'
 import { AuthenticationService } from 'app/auth/service';
 import { CoreConfigService } from '@core/services/config.service';
+import { FacebookService, LoginResponse } from 'ngx-facebook';
+import { NgbDate } from '@ng-bootstrap/ng-bootstrap';
+import { ConfirmComponent } from 'app/main/portal/confirm-dialog/confirm.component';
+
+
 
 @Component({
   selector: 'app-auth-login-v2',
@@ -14,6 +18,7 @@ import { CoreConfigService } from '@core/services/config.service';
   encapsulation: ViewEncapsulation.None
 })
 export class AuthLoginV2Component implements OnInit {
+  @ViewChild('confirm') modal: ConfirmComponent;
   //  Public
   public coreConfig: any;
   public loginForm: UntypedFormGroup;
@@ -36,7 +41,8 @@ export class AuthLoginV2Component implements OnInit {
     private _formBuilder: UntypedFormBuilder,
     private _route: ActivatedRoute,
     private _router: Router,
-    private _appService: AppService,
+    private _authService: AuthenticationService,
+    private fb:FacebookService
     //private _authenticationService: AuthenticationService
   ) {
     // redirect to home if already logged in
@@ -87,7 +93,7 @@ export class AuthLoginV2Component implements OnInit {
     // Login
     this.loading = true;
    
-    this._appService.Login(this.f.email.value, this.f.password.value);
+    this._authService.Login(this.f.email.value, this.f.password.value);
       
   }
 
@@ -102,25 +108,7 @@ export class AuthLoginV2Component implements OnInit {
       email: ['admin@demo.com', [Validators.required, Validators.email]],
       password: ['admin', Validators.required]
     });
-    this._appService.onLoginError
-    .pipe(takeUntil(this._unsubscribeAll))
-    .subscribe(message => {
-      if (message != '') {
-
-        //var comp = new ConfirmComponent(this._matDialog);
-        //comp.openDialog("Errore", message, false);
-      }
-    });
-    this._appService.onUserChanged
-    .pipe(takeUntil(this._unsubscribeAll))
-    .subscribe(user => {
-      if (user != null)
-      {
-        localStorage.setItem('currentUser', JSON.stringify(user));
-        this.returnUrl =  '/';
-      }
-      
-    });
+    
     // get return url from route parameters or default to '/'
     this.returnUrl = this._route.snapshot.queryParams['returnUrl'] || '/';
 
@@ -128,8 +116,34 @@ export class AuthLoginV2Component implements OnInit {
     this._coreConfigService.config.pipe(takeUntil(this._unsubscribeAll)).subscribe(config => {
       this.coreConfig = config;
     });
+
+    this._authService.onLoginError
+    .pipe(takeUntil(this._unsubscribeAll))
+    .subscribe(message=>{
+      
+      if (message != '') {
+        this.loading = false;
+      this.modal.openDialog("Error",message,true);
+      }
+     
+    });
   }
 
+  signInWithFB(): void {
+    this.fb.login()
+      .then((response: LoginResponse) => {
+        if (response.status=='connected')
+        {
+          var expireDate = new Date();
+          expireDate.setSeconds(expireDate.getSeconds() + response.authResponse.expiresIn);
+          var userId = response.authResponse.userID
+          //var expireDate = new NgbDate(d.getFullYear(),d.getMonth(),d.getDay());
+          this._authService.apiAuthenticate(response.authResponse.accessToken,expireDate,userId);
+        }
+      })
+      .catch((error: any) => console.error(error));
+  }
+  
   /**
    * On destroy
    */

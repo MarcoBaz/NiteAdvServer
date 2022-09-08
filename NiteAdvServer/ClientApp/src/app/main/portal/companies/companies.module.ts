@@ -11,9 +11,9 @@ import { CardSnippetModule } from '@core/components/card-snippet/card-snippet.mo
 import { ContentHeaderModule } from 'app/layout/components/content-header/content-header.module';
 import { CompaniesService } from './companies.service';
 import { CompaniesComponent } from './companies.component';
-import { ConfirmComponent } from 'app/main/portal/confirm-dialog/confirm.component';
 import { CompanyFormComponent } from './company-form/company-form.component';
 import { BlockUIModule } from 'ng-block-ui';
+import { ConfirmModule } from '../confirm-dialog/confirm.module';
 
 const routes: Routes = [
   {
@@ -29,7 +29,6 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     CompaniesComponent,
-    ConfirmComponent,
     CompanyFormComponent
   ],
   imports: [
@@ -40,11 +39,11 @@ const routes: Routes = [
     ContentHeaderModule,
     CardSnippetModule,
     NgxDatatableModule,
-    BlockUIModule.forRoot()
+    BlockUIModule.forRoot(),
+    ConfirmModule
   ],
   providers: [CompaniesService],
   entryComponents: [
-    ConfirmComponent,
     CompanyFormComponent
   ]
 })

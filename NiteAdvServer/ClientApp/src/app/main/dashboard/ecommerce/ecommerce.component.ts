@@ -3,7 +3,7 @@ import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { CoreConfigService } from '@core/services/config.service';
 import { CoreTranslationService } from '@core/services/translation.service';
 
-import { User } from 'app/auth/models';
+import { User } from 'app/main/portal/users/user.model';
 import { colors } from 'app/colors.const';
 import { AuthenticationService } from 'app/auth/service';
 import { DashboardService } from 'app/main/dashboard/dashboard.service';
@@ -11,7 +11,7 @@ import { DashboardService } from 'app/main/dashboard/dashboard.service';
 import { locale as english } from 'app/main/dashboard/i18n/en';
 import { locale as french } from 'app/main/dashboard/i18n/fr';
 import { locale as german } from 'app/main/dashboard/i18n/de';
-import { locale as portuguese } from 'app/main/dashboard/i18n/pt';
+import { locale as italian } from 'app/main/dashboard/i18n/it';
 
 @Component({
   selector: 'app-ecommerce',
@@ -79,7 +79,7 @@ export class EcommerceComponent implements OnInit {
     this.isAdmin = this._authenticationService.isAdmin;
     this.isClient = this._authenticationService.isClient;
 
-    this._coreTranslationService.translate(english, french, german, portuguese);
+    this._coreTranslationService.translate(english, french, german, italian);
     // Statistics Bar Chart
     this.statisticsBar = {
       chart: {

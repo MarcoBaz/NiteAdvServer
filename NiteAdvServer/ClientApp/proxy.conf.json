@@ -1,7 +1,7 @@
 {
 
     "/Web/*": {
-        "target":  "https://localhost:7277",
+        "target":  "http://localhost:7267",
         "secure": false,
         "logLevel": "debug",
         "changeOrigin": true

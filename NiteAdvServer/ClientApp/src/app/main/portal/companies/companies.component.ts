@@ -7,10 +7,10 @@ import { CoreTranslationService } from '@core/services/translation.service';
 /*import { locale as german } from 'app/main/tables/datatables/i18n/de';
 import { locale as english } from 'app/main/tables/datatables/i18n/en';
 import { locale as french } from 'app/main/tables/datatables/i18n/fr';
-import { locale as portuguese } from 'app/main/tables/datatables/i18n/pt';*/
+import { locale as italian } from 'app/main/tables/datatables/i18n/it';*/
 import { ConfirmComponent } from '../confirm-dialog/confirm.component';
 import { CompaniesService } from './companies.service';
-import { FilterCompany } from './companies.model';
+import { Company, FilterCompany } from './companies.model';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CompanyFormComponent } from './company-form/company-form.component';
 import { BlockUI, NgBlockUI } from 'ng-block-ui';
@@ -54,7 +54,9 @@ export class CompaniesComponent implements OnInit {
     this.filter = new FilterCompany();
     this.filter.PageSize =10;
     this.filter.Offset = 0;
-    //this._coreTranslationService.translate(english, french, german, portuguese);
+    this.filter.Where ='';
+    this.rows = new Array<Company>();
+    //this._coreTranslationService.translate(english, french, german, italian);
   }
 
   // Lifecycle Hooks
@@ -72,6 +74,7 @@ export class CompaniesComponent implements OnInit {
     .subscribe(response => {
       if (response.CompanyList != null)
       {
+        this.rows = [];
         this.rows = response.CompanyList;
         this.filter.TotalItems = response.ItemsCount;
         this.blockUI.stop();
@@ -128,17 +131,21 @@ export class CompaniesComponent implements OnInit {
    * @param event
    */
   filterUpdate(event) {
-    const val = event.target.value.toLowerCase();
-
-    // filter our data
-    const temp = this.tempData.filter(function (d) {
-      return d.full_name.toLowerCase().indexOf(val) !== -1 || !val;
-    });
-
-    // update the rows
-    this.kitchenSinkRows = temp;
-    // Whenever the filter changes, always go back to the first page
-    this.table.offset = 0;
+    
+    if (event.type == "search")
+    {
+      // filter our data
+      // const temp = this.tempData.filter(function (d) {
+      //   return d.full_name.toLowerCase().indexOf(val) !== -1 || !val;
+      // });
+      // update the rows
+      //this.kitchenSinkRows = temp;
+      this.filter.Offset =0;
+      this._companiesService.getDataTableRows(this.filter);
+      // Whenever the filter changes, always go back to the first page
+      //this.table.offset = 0;
+    }
+    
   }
 
   /**
@@ -154,8 +161,11 @@ export class CompaniesComponent implements OnInit {
    * @param selected
    */
   onSelect({ selected }) {
-    console.log('Select Event', selected, this.selected);
-    this.companyForm.openDialog(selected[0]);
+    //console.log('Select Event', selected, this.selected);
+    this.companyForm.openDialog(selected[0],()=>{
+
+      this. fullPageBlockUI();
+    });
   //this.selected.splice(0, this.selected.length);
   //  this.selected.push(...selected);
   }

@@ -12,6 +12,9 @@ using System.Threading.Tasks;
 using NiteAdvServerCore.Entities;
 using System.Reflection;
 using NiteAdvServerCore.Util;
+using Gremlin.Net.Driver.Remote;
+using Gremlin.Net.Process.Traversal;
+using Gremlin.Net.Structure;
 
 namespace NiteAdvServerCore.Managers;
 
@@ -39,7 +42,7 @@ internal class GremlinManager
     private static string Container => "g01";
     private static bool EnableSSL => true;
     private static int Port => 443;
-
+    private GremlinClient Client;
     private ConnectionPoolSettings connectionPoolSettings => new ConnectionPoolSettings()
     {
         MaxInProcessPerConnection = 10,
@@ -61,16 +64,18 @@ internal class GremlinManager
                                                 username: containerLink,
                                                 password: PrimaryKey);
 
+        Client = new GremlinClient(gremlinServer,
+         new GraphSON2Reader(),
+         new GraphSON2Writer(),
+         GremlinClient.GraphSON2MimeType,
+         connectionPoolSettings, webSocketConfiguration);
+
+        // non funziona api 3.4.13
+        // g = AnonymousTraversalSource.Traversal().WithRemote(new DriverRemoteConnection(Client));
+
     }
 
-    private GremlinClient GetClient()
-    {
-        return new GremlinClient(gremlinServer,
-            new GraphSON2Reader(),
-            new GraphSON2Writer(),
-            GremlinClient.GraphSON2MimeType,
-            connectionPoolSettings, webSocketConfiguration);
-    }
+
 
     private static Task<ResultSet<dynamic>> SubmitRequest(GremlinClient gremlinClient, string query)
     {
@@ -122,6 +127,7 @@ internal class GremlinManager
 
         return null;
     }
+    //@Marco: refactoring required
     public T CreateIstance<T>(IEnumerable<KeyValuePair<string, object>> input) where T : VertexEntity
     {
         try
@@ -132,35 +138,40 @@ internal class GremlinManager
             dynamic properties = input.Where(kvp => kvp.Key.Equals("properties")).FirstOrDefault().Value;
             foreach (var property in properties)
             {
+
                 foreach (var fieldInfo in fields)
                 {
-                    if (fieldInfo.Name == property.Key && fieldInfo.Name != "partitionKey")
+                    //se non ha attributi - per ora di nessun genere
+                    object[] attrs = fieldInfo.GetCustomAttributes(true);
+                    if (attrs == null || !attrs.Any())
                     {
-                        
+                        if (fieldInfo.Name == property.Key && fieldInfo.Name != "partitionKey")
+                        {
+
                             IEnumerable<object> val = (IEnumerable<object>)property.Value;
                             //recupero del valore 
                             var value = ((IEnumerable<KeyValuePair<string, object>>)val.ToList()[0]).Where(kvp => kvp.Key.Equals("value")).FirstOrDefault().Value;
                             if (!(value is null))
                             {
-                                //if (fieldInfo.Name == "LastSyncDate")
-                                //    fieldInfo.SetValue(entity, value.ToString());
-                                //else
-                                    fieldInfo.SetValue(entity, SetTheRightObject(fieldInfo, value));
-                            }
-                   
 
-                        break;
+                                fieldInfo.SetValue(entity, SetTheRightObject(fieldInfo, value));
+                            }
+
+
+                            break;
+                        }
                     }
                 }
+
             }
 
             return entity;
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
             return null;
         }
-       
+
     }
     private T InsertVertex<T>(T vertex, GremlinClient gremlinClient) where T : VertexEntity
     {
@@ -225,7 +236,7 @@ internal class GremlinManager
     {
         if (fieldInfo.PropertyType.Name.Contains("double") || fieldInfo.PropertyType.Name.Contains("Double"))
         {
-            try { return Convert.ToDouble(value); } catch(Exception) { return 0; }
+            try { return Convert.ToDouble(value); } catch (Exception) { return 0; }
         }
         else if (fieldInfo.PropertyType.Name.Contains("bool") || fieldInfo.PropertyType.Name.Contains("Boolean"))
             return Convert.ToBoolean(value);
@@ -235,16 +246,16 @@ internal class GremlinManager
     #endregion
 
     #region public Methods
-    public ResultSet<dynamic> FreeQuery(string query) 
+    public ResultSet<dynamic> FreeQuery(string query)
     {
-        using var gremlinClient = GetClient();
-        return SubmitRequest(gremlinClient, query).Result;
+
+        return SubmitRequest(Client, query).Result;
     }
-    public List<T> RetreiveData<T>(string query, bool isEdge=false) where T : VertexEntity
+    public async Task<List<T>> RetreiveData<T>(string query, bool isEdge = false) where T : VertexEntity
     {
+
         List<T> result = new List<T>();
-        using var gremlinClient = GetClient();
-        var resultSet = SubmitRequest(gremlinClient, query).Result;
+        var resultSet = await SubmitRequest(Client, query);
         if (resultSet.Count > 0)
         {
             foreach (var res in resultSet)
@@ -253,8 +264,8 @@ internal class GremlinManager
                 dynamic? cls = null;
                 if (!isEdge)
                 {
-                     cls = CreateIstance<T>(res);
-                   
+                    cls = CreateIstance<T>(res);
+
                 }
                 else
                 {
@@ -265,32 +276,31 @@ internal class GremlinManager
                 //  Console.WriteLine($"\t{output}");
             }
         }
-        return result;
+        return result.ToList();
     }
-    public long Count(string query) 
+    public long Count(string query)
     {
 
-        using var gremlinClient = GetClient();
-        var resultSet = SubmitRequest(gremlinClient, query).Result;
+        // using var gremlinClient = GetClient();
+        var resultSet = SubmitRequest(Client, query).Result;
         return resultSet.FirstOrDefault();
     }
-    public T SaveVertex<T>(T vertex, bool updateLastSyncDate=true) where T : VertexEntity
+    public T SaveVertex<T>(T vertex, bool updateLastSyncDate = true) where T : VertexEntity
     {
         T result = default(T);
-        using var gremlinClient = GetClient();
         if (updateLastSyncDate)
             vertex.LastSyncDate = ServerUtil.GetUnixFormatDateTime(DateTime.UtcNow);
-        if (!String.IsNullOrWhiteSpace(vertex.id))
+        if (!String.IsNullOrWhiteSpace(vertex.id.ToString()))
         {
-            var resultSet = SubmitRequest(gremlinClient, $"g.V('{vertex.id}').hasLabel('{vertex.label}')").Result;
+            var resultSet = SubmitRequest(Client, $"g.V('{vertex.id}').hasLabel('{vertex.label}')").Result;
             if (resultSet.Count > 0)
-                result = UpdateVertex<T>(vertex, gremlinClient);
+                result = UpdateVertex<T>(vertex, Client);
             else
-                result = InsertVertex<T>(vertex, gremlinClient);
+                result = InsertVertex<T>(vertex, Client);
 
         }
         else
-            result = InsertVertex<T>(vertex, gremlinClient);
+            result = InsertVertex<T>(vertex, Client);
 
         return result;
     }
@@ -298,9 +308,8 @@ internal class GremlinManager
     {
         try
         {
-            using var gremlinClient = GetClient();
             var cmd = "g.V('" + sourceID + "').as('v').V('" + targetID + "').coalesce(__.inE('" + relationship + "').where(outV().as('v')),addE('" + relationship + "').from('v'))";
-            var resultSet = SubmitRequest(gremlinClient, cmd).Result;
+            var resultSet = SubmitRequest(Client, cmd).Result;
             if (resultSet.Count == 0)
                 throw new Exception("malformed request");
 

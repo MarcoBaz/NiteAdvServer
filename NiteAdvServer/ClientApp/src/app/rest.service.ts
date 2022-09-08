@@ -38,7 +38,6 @@ export class RestService {
   constructor(private http: HttpClient) { tap(_ => console.log("Rest service started")) }
 
   getCredentials(jsonString): Observable<any> {
-    //console.log(`Credentials token=${JSON.stringify(jsonString)}`)
     let resp = new Response('getCredentials');
     return this.http.post<any>(endpoint + 'getlogin', jsonString, httpOptions).pipe(
       
@@ -49,8 +48,42 @@ export class RestService {
         catchError(this.handleError(resp))
     );
   }
+  FacebookAuthentication(facebookLogin): Observable<any> {
+    let resp = new Response('getFacebookCredentials');
+    return this.http.post<any>(endpoint + 'authFacebook', facebookLogin, httpOptions).pipe(
+      
+        tap((response) => {
+            resp =response;
+            //console.log(`Response credential received =${JSON.stringify(response)}`)
+        }),
+        catchError(this.handleError(resp))
+    );
+  }
+  getUserData(filter): Observable<any> {
+    let resp = new Response('getUserData');
+    return this.http.post<any>(endpoint + 'getUsersList', filter,httpOptions).pipe(
+      tap((serv) => {
+        resp = serv;
+        //console.log(`Service saved id=${JSON.stringify(resp)}`)
+      }),
+      catchError(this.handleError(resp))
+    );
+  }
+
+  SaveUser(user): Observable<any> {
+    ////console.log(`Save token=${JSON.stringify(user)}`
+    //console.log(`Ready To upload=${JSON.stringify(RenterOffice)}`)
+    let resp = new Response('saveUser');
+    return this.http.post<any>(endpoint + 'SaveUser', user,httpOptions).pipe(
+      tap((Company) => {
+        resp = Company;
+        //console.log(`Renter saved id=${JSON.stringify(resp)}`)
+      }),
+      catchError(this.handleError(resp))
+    );
+  }
   getCompanyData(filter): Observable<any> {
-    let resp = new Response('getTourList');
+    let resp = new Response('getUsersList');
     return this.http.post<any>(endpoint + 'getCompanyList', filter,httpOptions).pipe(
       tap((serv) => {
         resp = serv;
@@ -60,18 +93,6 @@ export class RestService {
     );
   }
 
- /* SaveCompany(company): Observable<any> {
-    var cmp = JSON.stringify(company);
-    let resp = new Response('saveCompany');
-    return this.http.post<any>(endpoint + 'saveCompany', cmp,httpOptions).pipe(
-      tap((Company) => {
-        resp = Company;
-      }),
-      catchError(
-        this.handleError(resp,error)
-        )
-    );
-  }*/
   SaveCompany(company): Observable<any> {
     ////console.log(`Save token=${JSON.stringify(user)}`
     //console.log(`Ready To upload=${JSON.stringify(RenterOffice)}`)
@@ -80,6 +101,29 @@ export class RestService {
     return this.http.post<any>(endpoint + 'SaveCompany', company,httpOptions).pipe(
       tap((Company) => {
         resp = Company;
+        //console.log(`Renter saved id=${JSON.stringify(resp)}`)
+      }),
+      catchError(this.handleError(resp))
+    );
+  }
+  getEvents(viewmodel): Observable<any> {
+    let resp = new Response('getEventsList');
+    return this.http.post<any>(endpoint + 'getEventsList', viewmodel,httpOptions).pipe(
+      tap((serv) => {
+        resp = serv;
+        //console.log(`Service saved id=${JSON.stringify(resp)}`)
+      }),
+      catchError(this.handleError(resp))
+    );
+  }
+
+  SaveEvent(eventVM): Observable<any> {
+    ////console.log(`Save token=${JSON.stringify(user)}`
+    //console.log(`Ready To upload=${JSON.stringify(RenterOffice)}`)
+    let resp = new Response('saveEvent');
+    return this.http.post<any>(endpoint + 'SaveEvent', eventVM,httpOptions).pipe(
+      tap((Event) => {
+        resp = Event;
         //console.log(`Renter saved id=${JSON.stringify(resp)}`)
       }),
       catchError(this.handleError(resp))

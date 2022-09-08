@@ -17,8 +17,8 @@ import { menu } from 'app/menu/menu';
 import { locale as menuEnglish } from 'app/menu/i18n/en';
 import { locale as menuFrench } from 'app/menu/i18n/fr';
 import { locale as menuGerman } from 'app/menu/i18n/de';
-import { locale as menuPortuguese } from 'app/menu/i18n/pt';
-
+import { locale as menuItalian } from 'app/menu/i18n/it';
+import { FacebookService, InitParams } from 'ngx-facebook';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -57,7 +57,8 @@ export class AppComponent implements OnInit, OnDestroy {
     private _coreLoadingScreenService: CoreLoadingScreenService,
     private _coreMenuService: CoreMenuService,
     private _coreTranslationService: CoreTranslationService,
-    private _translateService: TranslateService
+    private _translateService: TranslateService,
+    private fb:FacebookService
   ) {
     // Get the application main menu
     this.menu = menu;
@@ -69,13 +70,13 @@ export class AppComponent implements OnInit, OnDestroy {
     this._coreMenuService.setCurrentMenu('main');
 
     // Add languages to the translation service
-    this._translateService.addLangs(['en', 'fr', 'de', 'pt']);
+    this._translateService.addLangs(['en', 'fr', 'de', 'it']);
 
     // This language will be used as a fallback when a translation isn't found in the current language
     this._translateService.setDefaultLang('en');
 
     // Set the translations for the menu
-    this._coreTranslationService.translate(menuEnglish, menuFrench, menuGerman, menuPortuguese);
+    this._coreTranslationService.translate(menuEnglish, menuFrench, menuGerman, menuItalian);
 
     // Set the private defaults
     this._unsubscribeAll = new Subject();
@@ -237,6 +238,17 @@ export class AppComponent implements OnInit, OnDestroy {
 
     // Set the application page title
     this._title.setTitle(this.coreConfig.app.appTitle);
+
+
+    const initParams: InitParams = {
+      appId: '448013856427632',
+      status: true, 
+      cookie: true, 
+      xfbml: true,
+      version: 'v2.4'
+    };
+ 
+    this.fb.init(initParams);
   }
 
   /**
