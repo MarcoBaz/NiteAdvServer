@@ -1,20 +1,10 @@
-﻿<Properties StartupConfiguration="{79474FA2-A158-48F0-AA69-61A7E940F600}|Default">
-  <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore>
-      <Breakpoint file="/Users/mac/Projects/NiteAdvServer/NiteAdvServerCore/Managers/CosmosManager.cs" relfile="NiteAdvServerCore/Managers/CosmosManager.cs" line="184" column="1" />
-      <Breakpoint file="/Users/mac/Projects/NiteAdvServer/NiteAdvServerCore/Managers/BusinessLogic.cs" relfile="NiteAdvServerCore/Managers/BusinessLogic.cs" line="210" column="1" />
-      <Breakpoint file="/Users/mac/Projects/NiteAdvServer/NiteAdvServerCore/Util/Converter.cs" relfile="NiteAdvServerCore/Util/Converter.cs" line="16" column="1" />
-      <Breakpoint file="/Users/mac/Projects/NiteAdvServer/NiteAdvServer/Controllers/WebController.cs" relfile="NiteAdvServer/Controllers/WebController.cs" line="77" column="1" />
-      <Breakpoint file="/Users/mac/Projects/NiteAdvServer/NiteAdvServerCore/Managers/GremlinManager.cs" relfile="NiteAdvServerCore/Managers/GremlinManager.cs" line="172" column="1" />
-      <Breakpoint file="/Users/mac/Projects/NiteAdvServer/NiteAdvServerCore/Managers/BusinessLogic.cs" relfile="NiteAdvServerCore/Managers/BusinessLogic.cs" line="407" column="1" />
-    </BreakpointStore>
-  </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.Workbench ActiveDocument="NiteAdvServerCore/Entities/Event.cs">
+﻿<Properties StartupConfiguration="{F295C315-E5EA-497D-BE82-F7CCFEE2DE0A}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="NiteAdvServerCore/Managers/BusinessLogic.cs">
     <Files>
-      <File FileName="NiteAdvServer/Controllers/WebController.cs" Line="202" Column="39" IsPinned="True" />
-      <File FileName="NiteAdvServerCore/Managers/BusinessLogic.cs" Line="407" Column="1" IsPinned="True" />
+      <File FileName="NiteAdvServer/Controllers/WebController.cs" Line="2" Column="9" IsPinned="True" />
+      <File FileName="NiteAdvServerCore/Managers/BusinessLogic.cs" Line="408" Column="1" IsPinned="True" />
       <File FileName="NiteAdvServerCore/Managers/GremlinManager.cs" Line="172" Column="1" IsPinned="True" />
-      <File FileName="NiteAdvServerCore/Managers/FacebookManager.cs" Line="57" Column="1" />
+      <File FileName="NiteAdvServerCore/Managers/FacebookManager.cs" Line="3" Column="30" />
       <File FileName="NiteAdvServerCore/Entities/VertexEntity.cs" Line="18" Column="22" />
       <File FileName="NiteAdvServerCore/Managers/CosmosManager.cs" Line="59" Column="33" />
       <File FileName="NiteAdvServerCore/DTO/EventDTO.cs" Line="1" Column="1" />
@@ -25,7 +15,7 @@
       <File FileName="NiteAdvServerCore/Generic/EventsResponse.cs" Line="11" Column="39" />
       <File FileName="NiteAdvServerCore/Generic/FilterCompany.cs" Line="12" Column="38" />
       <File FileName="NiteAdvServerCore/Generic/UserResponse.cs" Line="17" Column="43" />
-      <File FileName="NiteAdvServerCore/Entities/Event.cs" Line="40" Column="85" />
+      <File FileName="NiteAdvServerCore/Entities/Event.cs" Line="40" Column="1" />
       <File FileName="NiteAdvServerCore/Util/MapperConfigurator.cs" Line="95" Column="46" />
       <File FileName="NiteAdvServerCore/Entities/User.cs" Line="33" Column="70" />
     </Files>
@@ -33,15 +23,9 @@
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="NiteAdvServer" expanded="True">
-            <Node name="NiteAdvServer" expanded="True">
-              <Node name="Controllers" expanded="True" />
-              <Node name="ViewModel" expanded="True" />
-            </Node>
             <Node name="NiteAdvServerCore" expanded="True">
               <Node name="DTO" expanded="True" />
-              <Node name="Entities" expanded="True">
-                <Node name="Event.cs" selected="True" />
-              </Node>
+              <Node name="Entities" expanded="True" />
               <Node name="Generic" expanded="True" />
               <Node name="Managers" expanded="True" />
               <Node name="Util" expanded="True" />
@@ -56,8 +40,17 @@
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.ItemProperties.NiteAdvServer PreferredExecutionTarget="/Applications/Safari.app" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore>
+      <Breakpoint file="/Users/mac/Projects/NiteAdvServer/NiteAdvServerCore/Managers/CosmosManager.cs" relfile="NiteAdvServerCore/Managers/CosmosManager.cs" line="184" column="1" />
+      <Breakpoint file="/Users/mac/Projects/NiteAdvServer/NiteAdvServerCore/Managers/BusinessLogic.cs" relfile="NiteAdvServerCore/Managers/BusinessLogic.cs" line="209" column="1" />
+      <Breakpoint file="/Users/mac/Projects/NiteAdvServer/NiteAdvServerCore/Util/Converter.cs" relfile="NiteAdvServerCore/Util/Converter.cs" line="16" column="1" />
+      <Breakpoint file="/Users/mac/Projects/NiteAdvServer/NiteAdvServer/Controllers/WebController.cs" relfile="NiteAdvServer/Controllers/WebController.cs" line="77" column="1" />
+      <Breakpoint file="/Users/mac/Projects/NiteAdvServer/NiteAdvServerCore/Managers/GremlinManager.cs" relfile="NiteAdvServerCore/Managers/GremlinManager.cs" line="172" column="1" />
+    </BreakpointStore>
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
 </Properties>

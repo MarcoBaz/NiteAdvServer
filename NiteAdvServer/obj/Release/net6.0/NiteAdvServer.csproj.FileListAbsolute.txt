@@ -14,7 +14,6 @@
 /Users/mac/Projects/NiteAdvServer/NiteAdvServer/bin/Release/net6.0/NiteAdvServer.pdb
 /Users/mac/Projects/NiteAdvServer/NiteAdvServer/bin/Release/net6.0/AutoMapper.dll
 /Users/mac/Projects/NiteAdvServer/NiteAdvServer/bin/Release/net6.0/Azure.Core.dll
-/Users/mac/Projects/NiteAdvServer/NiteAdvServer/bin/Release/net6.0/Facebook.dll
 /Users/mac/Projects/NiteAdvServer/NiteAdvServer/bin/Release/net6.0/FirebaseAdmin.dll
 /Users/mac/Projects/NiteAdvServer/NiteAdvServer/bin/Release/net6.0/Google.Api.Gax.dll
 /Users/mac/Projects/NiteAdvServer/NiteAdvServer/bin/Release/net6.0/Google.Api.Gax.Rest.dll

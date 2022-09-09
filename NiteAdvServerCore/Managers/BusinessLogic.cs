@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Facebook;
 using NiteAdvServerCore.DTO;
 using NiteAdvServerCore.DTO.Token;
 using NiteAdvServerCore.Entities;

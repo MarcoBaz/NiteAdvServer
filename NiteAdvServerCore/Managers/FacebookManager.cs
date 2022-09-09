@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Net.Http.Headers;
 using System.Security.Claims;
-using Facebook;
 using Google.Apis.Auth.OAuth2;
 using Microsoft.VisualBasic;
 using Newtonsoft.Json;

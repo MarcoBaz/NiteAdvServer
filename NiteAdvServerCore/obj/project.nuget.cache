@@ -1,12 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "mbwPVNwP/4rwh9BhI+bWZqYJZqM4tHlQLOkI3Pr9vhJN/sAAhNyBTBMFV8spsBRgg0wxwmwKFSMybKsFHpYGZw==",
+  "dgSpecHash": "4k6JE9gIOs2I3nBUWzWid948vbkm0O8zof8m8z9qzbtdxTTH6J9MMOKtzp93GVqV+Jeu5+EI3eF8Pi6CeWpTSw==",
   "success": true,
   "projectFilePath": "/Users/mac/Projects/NiteAdvServer/NiteAdvServerCore/NiteAdvServerCore.csproj",
   "expectedPackageFiles": [
     "/Users/mac/.nuget/packages/automapper/11.0.1/automapper.11.0.1.nupkg.sha512",
     "/Users/mac/.nuget/packages/azure.core/1.19.0/azure.core.1.19.0.nupkg.sha512",
-    "/Users/mac/.nuget/packages/facebook/7.0.6/facebook.7.0.6.nupkg.sha512",
     "/Users/mac/.nuget/packages/firebaseadmin/2.3.0/firebaseadmin.2.3.0.nupkg.sha512",
     "/Users/mac/.nuget/packages/google.api.gax/3.2.0/google.api.gax.3.2.0.nupkg.sha512",
     "/Users/mac/.nuget/packages/google.api.gax.rest/3.2.0/google.api.gax.rest.3.2.0.nupkg.sha512",
@@ -122,16 +121,5 @@
     "/usr/local/share/dotnet/sdk/NuGetFallbackFolder/system.xml.xmlserializer/4.3.0/system.xml.xmlserializer.4.3.0.nupkg.sha512",
     "/Users/mac/.nuget/packages/twilio/5.75.2/twilio.5.75.2.nupkg.sha512"
   ],
-  "logs": [
-    {
-      "code": "NU1701",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Package 'Facebook 7.0.6' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net6.0'. This package may not be fully compatible with your project.",
-      "libraryId": "Facebook",
-      "targetGraphs": [
-        "net6.0"
-      ]
-    }
-  ]
+  "logs": []
 }

@@ -45,14 +45,6 @@
           }
         }
       },
-      "Facebook/7.0.6": {
-        "runtime": {
-          "lib/net45/Facebook.dll": {
-            "assemblyVersion": "6.0.10.0",
-            "fileVersion": "7.0.6.0"
-          }
-        }
-      },
       "FirebaseAdmin/2.3.0": {
         "dependencies": {
           "Google.Api.Gax.Rest": "3.2.0",
@@ -1118,7 +1110,6 @@
       "NiteAdvServerCore/1.0.0": {
         "dependencies": {
           "AutoMapper": "11.0.1",
-          "Facebook": "7.0.6",
           "FirebaseAdmin": "2.3.0",
           "Gremlin.Net": "3.4.13",
           "MailKit": "3.3.0",
@@ -1152,13 +1143,6 @@
       "sha512": "sha512-lcDjG635DPE4fU5tqSueVMmzrx0QrIfPuY0+y6evHN5GanQ0GB+/4nuMHMmoNPwEow6OUPkJu4cZQxfHJQXPdA==",
       "path": "azure.core/1.19.0",
       "hashPath": "azure.core.1.19.0.nupkg.sha512"
-    },
-    "Facebook/7.0.6": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-D9nlWZb88S4U+eh1pUDQ+AkSkiht6m0eFpxKFddZnQSSFTnncvDMBEnNODy4fOIOjWQIiOXRVbuY04jCPyWqkw==",
-      "path": "facebook/7.0.6",
-      "hashPath": "facebook.7.0.6.nupkg.sha512"
     },
     "FirebaseAdmin/2.3.0": {
       "type": "package",
