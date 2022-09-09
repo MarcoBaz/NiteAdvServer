@@ -1,8 +1,0 @@
-{
-"SpaProxyServer": {
-"ServerUrl": "https://localhost:44414",
-"LaunchCommand": "",
-"WorkingDirectory": "/Users/mac/Projects/NiteAdvServer/NiteAdvServer/ClientApp/",
-"MaxTimeoutInSeconds": "120"
-}
-}
