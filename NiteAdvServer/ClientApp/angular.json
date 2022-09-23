@@ -60,7 +60,7 @@
             "stylePreprocessorOptions": {
               "includePaths": [ "node_modules", "src/assets/" ]
             },
-            "scripts": [ "./node_modules/katex/dist/katex.min.js", "./node_modules/quill/dist/quill.min.js" ],
+            "scripts": [ "./src/assets/site/js/jquery.js","./node_modules/katex/dist/katex.min.js", "./node_modules/quill/dist/quill.min.js" ],
             "vendorChunk": true,
             "extractLicenses": false,
             "buildOptimizer": false,

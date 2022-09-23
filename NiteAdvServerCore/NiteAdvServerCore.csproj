@@ -14,6 +14,7 @@
     <None Remove="Twilio" />
     <None Remove="Microsoft.Azure.Cosmos" />
     <None Remove="Facebook" />
+    <None Remove="Azure.Storage.Blobs" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="11.0.1" />
@@ -24,5 +25,6 @@
     <PackageReference Include="FirebaseAdmin" Version="2.3.0" />
     <PackageReference Include="Twilio" Version="5.75.2" />
     <PackageReference Include="Microsoft.Azure.Cosmos" Version="3.30.0" />
+    <PackageReference Include="Azure.Storage.Blobs" Version="12.13.1" />
   </ItemGroup>
 </Project>

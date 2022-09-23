@@ -17,7 +17,7 @@ import { CoreConfig } from '@core/types';
 export const coreConfig: CoreConfig = {
   app: {
     appName     : 'Nite Advisor',                                        // App Name
-    appTitle    : 'Nite Advisor Backend', // App Title
+    appTitle    : 'Nite Advisor', // App Title
     appLogoImage: 'assets/images/logo/logobig.png',                  // App Logo
     appLanguage : 'en',                                           // App Default Language (en, fr, de, pt etc..)
   },
@@ -50,3 +50,5 @@ export const coreConfig: CoreConfig = {
     buyNow      : false                        // Boolean: true, false (Set false in real project, For demo purpose only)
   }
 }
+
+

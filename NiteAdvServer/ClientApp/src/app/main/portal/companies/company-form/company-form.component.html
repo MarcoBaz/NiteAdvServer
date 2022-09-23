@@ -1,6 +1,6 @@
 <ng-template #modalForm let-modal>
     <div class="modal-header">
-      <h4 class="modal-title" id="myModalLabel1">Company</h4>
+      <h4 class="modal-title" id="myModalLabel1">{{company.Name}}</h4>
       <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
         <span aria-hidden="true">&times;</span>
       </button>
@@ -12,12 +12,56 @@
             <input Type="hidden" name="LastSyncDate" formControlName="LastSyncDate">
             <!--<input Type="hidden" name="Canceled" formControlName="Canceled">-->
             <div class="row">
+              <div class="col-md-12 col-24">
+                <img src="{{company.ImageUrl}}" style="width:100%;max-height: 300px;"/>
+              </div>
               <div class="col-md-6 col-12">
+                <div class="form-group">
+                  <fieldset class="form-group">
+                    <label for="file-upload-single">Image:</label>
+                    <div class="custom-file">
+                      <input
+                        type="file"
+                        class="custom-file-input"
+                        type="file"
+                        ng2FileSelect
+                        [uploader]="uploader"
+                        (onFileSelected)="onFileSelected($event)"
+                        id="file-upload-single"
+                      />
+                      <label class="custom-file-label">{{filename}}</label>
+                    </div>
+                  </fieldset>
+                </div>
+              </div>
+              <div class="col-md-6 col-12">
+                <div class="form-group">
+                  <div class="form-group">
+                    <label for="Type">Size</label>
+                    <select class="form-control" formControlName="Size" [value]="Size">
+                      <option>S</option>
+                      <option>M</option>
+                      <option>L</option>
+                      <option>XL</option>
+                    </select> 
+                   
+                </div>
+              </div>
+                <!-- <label>{{company.Id}}</label> -->
+                
+              </div>
+              <div class="col-md-12 col-24">
+                <div class="form-group">
+                    <label for="Street">Street</label>
+                    <input type="text" formControlName="Street" class="form-control" placeholder="Street" name="Street" />
+                </div>
+              </div>
+              <!-- <div class="col-md-6 col-12">
                 <div class="form-group">
                   <label for="Name">Name</label>
                   <input type="text"  formControlName="Name" class="form-control" placeholder="Name"  name="Name" />
                 </div>
-              </div>
+              </div> -->
               <div class="col-md-6 col-12">
                 <div class="form-group">
                   <label for="City">City</label>
@@ -32,19 +76,14 @@
               </div>
               <div class="col-md-6 col-12">
                 <div class="form-group">
-                    <label for="Street">Street</label>
-                    <input type="text" formControlName="Street" class="form-control" placeholder="Street" name="Street" />
-                </div>
-              </div>
-              <div class="col-md-6 col-12">
-                <div class="form-group">
-                    <label for="Type">Type</label>
+                    <label for="Type">Type (Google Types: {{company.GoogleTypes}})</label>
                     <select class="form-control" formControlName="Type" [value]="Type">
-                      <option>teather</option>
                       <option>club</option>
-                      <option>club 2</option>
+                      <option>concert</option>
+                      <option>theater</option>
                       <option>festival</option>
-                    </select>
+                    </select> 
+                   
                 </div>
               </div>
               <div class="col-md-6 col-12">
@@ -53,21 +92,10 @@
                     <input type="text" id="Phone" class="form-control" placeholder="Phone" name="Phone" />
                 </div>
               </div>
-              <div class="col-12">
-               
-              </div>
+             
             </div>
-          
-     <!-- <form action="#">
-        <label>Email: </label>
-        <div class="form-group">
-          <input type="text" placeholder="Email Address" class="form-control" />
-        </div>
-        <label>Password: </label>
-        <div class="form-group">
-          <input type="password" placeholder="Password" class="form-control" />
-        </div>
-      </form> -->
+           
+    
     </div>
     <div class="modal-footer">
        

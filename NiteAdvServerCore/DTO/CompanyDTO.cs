@@ -28,5 +28,8 @@ namespace NiteAdvServerCore.DTO
         public string Phone { get; set; }
         public string OpeningHours { get; set; }
         public double RatingTotal { get; set; }
+        public string Size { get; set; }
+        public bool IsInBlackList { get; set; }
+        public bool Deleted { get; set; }
     }
 }

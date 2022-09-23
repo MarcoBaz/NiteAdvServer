@@ -25,9 +25,9 @@ export class CalendarEventSidebarComponent implements OnInit {
   public DescriptionString;
   public CategoryType;
   public selectLabel = [
-    { label: 'Concerto', bullet: 'primary' },
+    { label: 'Concert', bullet: 'primary' },
     { label: 'Club', bullet: 'danger' },
-    { label: 'Teatro', bullet: 'warning' },
+    { label: 'Theater', bullet: 'warning' },
     { label: 'Festival', bullet: 'success' },
     // { label: 'ETC', bullet: 'info' }
   ];

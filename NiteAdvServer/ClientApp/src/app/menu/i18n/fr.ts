@@ -11,6 +11,7 @@ export const locale = {
       APPS: {
         EVENTS: 'Events',
         COMPANIES: 'Companies',
+        EVENTLIST: 'Events list',
         USERS: 'Users',
         SECTION: 'Applications et pages',
         EMAIL: 'E-mail',

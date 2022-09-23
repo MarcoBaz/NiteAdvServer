@@ -69,7 +69,7 @@ export class EventsService implements Resolve<any> {
     vm.ActualMonth = new Date().getMonth()+1;
     vm.IdUser = user.id;
     return new Promise((resolve, reject) => {
-      this._rest.getEvents(vm).subscribe((response: any) => {
+      this._rest.getUserEvents(vm).subscribe((response: any) => {
       //  console.log(JSON.stringify(response));
            if (response.Error == '' )
            {
@@ -191,7 +191,7 @@ export class EventsService implements Resolve<any> {
 
   postUpdatedEvent(eventVM): Promise<any> {
     return new Promise((resolve, reject) => {
-      this._rest.SaveEvent(eventVM).subscribe((response: any) => {
+      this._rest.SaveUserEvent(eventVM).subscribe((response: any) => {
 
         if (response.Error == '') {
           this.currentEvent = response.Data;

@@ -26,5 +26,7 @@ namespace NiteAdvServerCore.DTO
         public double UsersGoing { get; set; }
         public double UsersInterested { get; set; }
         public bool AllDay { get; set; }
+        public bool IsInBlackList { get; set; }
+        public bool Deleted { get; set; }
     }
 }

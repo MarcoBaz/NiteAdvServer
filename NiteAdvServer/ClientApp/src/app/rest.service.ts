@@ -93,12 +93,9 @@ export class RestService {
     );
   }
 
-  SaveCompany(company): Observable<any> {
-    ////console.log(`Save token=${JSON.stringify(user)}`
-    //console.log(`Ready To upload=${JSON.stringify(RenterOffice)}`)
-    var cmp = JSON.stringify(company);
+  SaveCompany(filter): Observable<any> {
     let resp = new Response('saveCompany');
-    return this.http.post<any>(endpoint + 'SaveCompany', company,httpOptions).pipe(
+    return this.http.post<any>(endpoint + 'SaveCompany', filter,httpOptions).pipe(
       tap((Company) => {
         resp = Company;
         //console.log(`Renter saved id=${JSON.stringify(resp)}`)
@@ -106,9 +103,44 @@ export class RestService {
       catchError(this.handleError(resp))
     );
   }
-  getEvents(viewmodel): Observable<any> {
+  DeleteCompany(filter): Observable<any> {
+    let resp = new Response('DeleteCompany');
+    return this.http.post<any>(endpoint + 'DeleteCompany', filter,httpOptions).pipe(
+      tap((Company) => {
+        resp = Company;
+        //console.log(`Renter saved id=${JSON.stringify(resp)}`)
+      }),
+      catchError(this.handleError(resp))
+    );
+  }
+  SaveCompanyImage(file): Observable<any> {
+    ////console.log(`Save token=${JSON.stringify(user)}`
+    // //console.log(`Ready To upload=${user}`)
+    let resp = new Response('SaveCompanyImage');
+    return this.http.post<any>(endpoint + 'SaveCompanyImage', file, httpMultipartOptions).pipe(
+      tap((Renter) => {
+        resp = Renter;
+        //console.log(`saveImageService saved id=${JSON.stringify(resp)}`)
+      }),
+      catchError(this.handleError(resp))
+    );
+  }
+
+  CompanyBlackList(filter): Observable<any> {
+    ////console.log(`Save token=${JSON.stringify(user)}`
+    //console.log(`Ready To upload=${JSON.stringify(RenterOffice)}`)
+    let resp = new Response('CompanyBlackList');
+    return this.http.post<any>(endpoint + 'CompanyBlackList', filter,httpOptions).pipe(
+      tap((res) => {
+        resp = res;
+        //console.log(`Renter saved id=${JSON.stringify(resp)}`)
+      }),
+      catchError(this.handleError(resp))
+    );
+  }
+  getUserEvents(viewmodel): Observable<any> {
     let resp = new Response('getEventsList');
-    return this.http.post<any>(endpoint + 'getEventsList', viewmodel,httpOptions).pipe(
+    return this.http.post<any>(endpoint + 'getUserEventsList', viewmodel,httpOptions).pipe(
       tap((serv) => {
         resp = serv;
         //console.log(`Service saved id=${JSON.stringify(resp)}`)
@@ -117,13 +149,81 @@ export class RestService {
     );
   }
 
-  SaveEvent(eventVM): Observable<any> {
+  SaveUserEvent(eventVM): Observable<any> {
     ////console.log(`Save token=${JSON.stringify(user)}`
     //console.log(`Ready To upload=${JSON.stringify(RenterOffice)}`)
     let resp = new Response('saveEvent');
-    return this.http.post<any>(endpoint + 'SaveEvent', eventVM,httpOptions).pipe(
+    return this.http.post<any>(endpoint + 'SaveUserEvent', eventVM,httpOptions).pipe(
       tap((Event) => {
         resp = Event;
+        //console.log(`Renter saved id=${JSON.stringify(resp)}`)
+      }),
+      catchError(this.handleError(resp))
+    );
+  }
+
+  getEventsData(filter): Observable<any> {
+    let resp = new Response('getEventsData');
+    return this.http.post<any>(endpoint + 'GetEventsList', filter,httpOptions).pipe(
+      tap((serv) => {
+        resp = serv;
+        //console.log(`Service saved id=${JSON.stringify(resp)}`)
+      }),
+      catchError(this.handleError(resp))
+    );
+  }
+
+  SaveEvent(filter): Observable<any> {
+    let resp = new Response('saveEvent');
+    return this.http.post<any>(endpoint + 'saveEvent', filter,httpOptions).pipe(
+      tap((Company) => {
+        resp = Company;
+        //console.log(`Renter saved id=${JSON.stringify(resp)}`)
+      }),
+      catchError(this.handleError(resp))
+    );
+  }
+  DeleteEvent(filter): Observable<any> {
+    let resp = new Response('DeleteEvent');
+    return this.http.post<any>(endpoint + 'DeleteEvent', filter,httpOptions).pipe(
+      tap((Company) => {
+        resp = Company;
+        //console.log(`Renter saved id=${JSON.stringify(resp)}`)
+      }),
+      catchError(this.handleError(resp))
+    );
+  }
+  SaveEventImage(file): Observable<any> {
+    ////console.log(`Save token=${JSON.stringify(user)}`
+    // //console.log(`Ready To upload=${user}`)
+    let resp = new Response('SaveEventImage');
+    return this.http.post<any>(endpoint + 'SaveEventImage', file, httpMultipartOptions).pipe(
+      tap((Renter) => {
+        resp = Renter;
+        //console.log(`saveImageService saved id=${JSON.stringify(resp)}`)
+      }),
+      catchError(this.handleError(resp))
+    );
+  }
+  SendContact(contact): Observable<any> {
+    let resp = new Response('SendContact');
+    return this.http.post<any>(endpoint + 'SendContact', contact, httpOptions).pipe(
+      
+        tap((response) => {
+            resp =response;
+            //console.log(`Response credential received =${JSON.stringify(response)}`)
+        }),
+        catchError(this.handleError(resp))
+    );
+  }
+  /* Events list */
+  EventsBlackList(filter): Observable<any> {
+    ////console.log(`Save token=${JSON.stringify(user)}`
+    //console.log(`Ready To upload=${JSON.stringify(RenterOffice)}`)
+    let resp = new Response('EventsBlackList');
+    return this.http.post<any>(endpoint + 'EventsBlackList', filter,httpOptions).pipe(
+      tap((res) => {
+        resp = res;
         //console.log(`Renter saved id=${JSON.stringify(resp)}`)
       }),
       catchError(this.handleError(resp))

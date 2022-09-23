@@ -13,7 +13,7 @@ namespace NiteAdvServerCore.Generic
         {
             CompanyList = new List<Company>();
         }
-       public List<Company> CompanyList { get; set; }
-       public int ItemsCount { get; set; }
+        public List<Company> CompanyList { get; set; }
+        public int ItemsCount { get; set; }
     }
 }

@@ -1,15 +1,18 @@
 export class FilterCompany {
-    IdCompany: number;
+    CompanyToSave: Company;
+    City: string;
     Where: string;
     Offset: number;
     PageSize: number;
     TotalItems: number;
+    CheckedCompanies: Company[];
 }
 
 export class CompanyResponse{
      CompanyList: Company[];
      ItemsCount :number;
 }
+
 export class Company {
     constructor(company) {
         
@@ -30,13 +33,16 @@ export class Company {
         this.Rating = company.Rating ||0;
         this.Reviews = company.Reviews || '';
         this.Email = company.Email || '';
+        this.GoogleTypes = company.GoogleTypes || '';
         this.Phone = company.Phone || '';
         this.OpeningHours = company.OpeningHours || '';
         this.GoogleUrl = company.GoogleUrl || '';
         this.WebSite = company.WebSite || '';
         this.RatingTotal = company.RatingTotal || 0;
-        this.LastSyncDate = company.LastSyncDate || new Date();
-        
+        this.LastSyncDate = company.LastSyncDate ||0;
+        this.IsInBlackList = company.IsInBlackList || false;
+        this.Deleted = company.Deleted || false;
+        this.Size = company.Size ||'';
     }
     id: string;
     pk:string;
@@ -53,6 +59,7 @@ export class Company {
     GooglePlaceId: string;
     PlaceSearch: string;
     Type: string;
+    Size: string;
     GoogleTypes: string;
     Rating: number;
     Reviews: string;
@@ -63,4 +70,7 @@ export class Company {
     OpeningHours: string;
     RatingTotal: number;
     label: string;
+    IsInBlackList: boolean;
+    Deleted: boolean;
 }
+

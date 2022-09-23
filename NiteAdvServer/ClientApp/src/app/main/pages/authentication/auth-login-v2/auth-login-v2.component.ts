@@ -24,7 +24,7 @@ export class AuthLoginV2Component implements OnInit {
   public loginForm: UntypedFormGroup;
   public loading = false;
   public submitted = false;
-  public returnUrl: string;
+  //public returnUrl: string;
   public error = '';
   public passwordTextType: boolean;
 
@@ -110,8 +110,13 @@ export class AuthLoginV2Component implements OnInit {
     });
     
     // get return url from route parameters or default to '/'
-    this.returnUrl = this._route.snapshot.queryParams['returnUrl'] || '/';
-
+   // this.returnUrl = this._route.snapshot.queryParams['returnUrl'] || '/';
+    // this._authService.onUserLogged.pipe(takeUntil(this._unsubscribeAll)).subscribe(user => {
+    //   if (user != null && user.id != null)
+    //   {
+    //     this._router.navigate([this.returnUrl]);
+    //   }
+    // });
     // Subscribe to config changes
     this._coreConfigService.config.pipe(takeUntil(this._unsubscribeAll)).subscribe(config => {
       this.coreConfig = config;

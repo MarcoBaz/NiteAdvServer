@@ -19,7 +19,7 @@ export class AuthenticationService {
   onLoginError: BehaviorSubject<string>;
   //private
   private currentUserSubject: BehaviorSubject<User>;
-
+  public onUserLogged: BehaviorSubject<any>;
   /**
    *
    * @param {HttpClient} _http
@@ -32,6 +32,7 @@ export class AuthenticationService {
     this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
     this.currentUser = this.currentUserSubject.asObservable();
     this.onLoginError = new BehaviorSubject('');
+    this.onUserLogged = new BehaviorSubject({});
   }
 
   // getter: currentUserValue
@@ -71,7 +72,8 @@ export class AuthenticationService {
            //UserLogged.setValues(response.Data);
            localStorage.setItem('currentUser', JSON.stringify(response.Data));
            this.currentUserSubject.next(user);
-           this._route.navigate(['/']);
+           this.onUserLogged.next(user);
+           resolve(response);
           /* setTimeout(() => {
             this._toastrService.success(
               'You have successfully logged in as an ' +
@@ -89,7 +91,7 @@ export class AuthenticationService {
          else
          {
   
-          this.onLoginError.next("Credenziali errate");
+          this.onLoginError.next(response.Error);
            // throw new Error(response.Error);
          }
        
@@ -110,13 +112,15 @@ export class AuthenticationService {
                  //UserLogged.setValues(response.Data);
                  localStorage.setItem('currentUser', JSON.stringify(user));
                  this.currentUserSubject.next(user);
-                 //this.onUserChanged.next(response.Data);
-                 this._route.navigate(['/']);
+                 this.onUserLogged.next(response.Data);
+                // this._route.navigate(['/dashboard']);
+                 //this.onUserLogged.next(user);
+                 resolve(user);
                 
                }
                else
                {
-                this.onLoginError.next("Credenziali errate");
+                this.onLoginError.next(response.Error);
                  // throw new Error(response.Error);
                }
              

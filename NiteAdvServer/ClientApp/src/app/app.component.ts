@@ -198,11 +198,11 @@ export class AppComponent implements OnInit, OnDestroy {
       ) {
         this._elementRef.nativeElement.classList.add('blank-page');
         // ! Fix: Transition issue while coming from blank page
-        this._renderer.setAttribute(
+        /*this._renderer.setAttribute(
           this._elementRef.nativeElement.getElementsByClassName('app-content')[0],
           'style',
           'transition:none'
-        );
+        );*/
       } else {
         this._elementRef.nativeElement.classList.remove('blank-page');
         // ! Fix: Transition issue while coming from blank page

@@ -63,6 +63,14 @@ export const menu: CoreMenu[] = [
         url: 'portal/companies'
       },
       {
+        id: 'eventslist',
+        title: 'Events list',
+        translate: 'MENU.APPS.EVENTLIST',
+        type: 'item',
+        icon: 'check-square',
+        url: 'portal/eventlist'
+      },
+      {
         id: 'users',
         title: 'Users',
         translate: 'MENU.APPS.USERS',

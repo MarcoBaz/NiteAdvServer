@@ -25,6 +25,7 @@ namespace NiteAdvServerCore.Entities
         public string? ImageUrl { get; set; }
         public string? GooglePlaceId { get; set; }
         public string? Type { get; set; }
+        public string? Size { get; set; }
         public string? GoogleTypes { get; set; }
         public double Rating { get; set; }
         public string? Reviews { get; set; }
@@ -34,7 +35,8 @@ namespace NiteAdvServerCore.Entities
         public string? Phone { get; set; }
         public string? OpeningHours { get; set; }
         public double RatingTotal { get; set; }
- 
+        public bool IsInBlackList { get; set; }
+        public bool Deleted { get; set; }
     }
    
 }

@@ -166,9 +166,12 @@ export class NavbarComponent implements OnInit, OnDestroy {
    */
   logout() {
     this._authenticationService.logout();
-    this._router.navigate(['/pages/authentication/login-v2']);
+    this.redirectTo('/');
   }
-
+  redirectTo(uri:string){
+    this._router.navigateByUrl('/', {skipLocationChange: true}).then(()=>
+    this._router.navigate([uri]));
+ }
   // Lifecycle Hooks
   // -----------------------------------------------------------------------------------------------------
 

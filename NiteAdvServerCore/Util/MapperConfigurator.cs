@@ -82,6 +82,9 @@ namespace NiteAdvServerCore.Util
             dto.Phone = cmp.Phone;
             dto.OpeningHours = cmp.OpeningHours;
             dto.RatingTotal = cmp.RatingTotal;
+            dto.IsInBlackList = cmp.IsInBlackList;
+            dto.Deleted = cmp.Deleted;
+            dto.Size = cmp.Size;
             return dto;
 
         }

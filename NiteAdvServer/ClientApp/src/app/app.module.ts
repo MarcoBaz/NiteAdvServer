@@ -12,7 +12,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrModule } from 'ngx-toastr';
 import { TranslateModule } from '@ngx-translate/core';
 import { ContextMenuModule } from '@ctrl/ngx-rightclick';
-
+import { ConfirmModule } from './main/portal/confirm-dialog/confirm.module';
 import { CoreModule } from '@core/core.module';
 import { CoreCommonModule } from '@core/common.module';
 import { CoreSidebarModule, CoreThemeCustomizerModule } from '@core/components';
@@ -33,6 +33,8 @@ import { SubMenuCustomContextMenuComponent } from './main/extensions/context-men
 import { RestService } from './rest.service';
 import { AppService } from './app.service';
 import { FacebookModule } from 'ngx-facebook';
+import { SiteModule } from './main/site/site.module';
+
 
 const appRoutes: Routes = [
   {
@@ -42,6 +44,10 @@ const appRoutes: Routes = [
   {
     path: 'portal',
     loadChildren: () => import('./main/portal/portal.module').then(m => m.PortalModule)
+  },
+  {
+    path: 'site',
+    loadChildren: () => import('./main/site/site.module').then(m => m.SiteModule)
   },
   {
     path: 'apps',
@@ -84,7 +90,8 @@ const appRoutes: Routes = [
   },
   {
     path: '',
-    redirectTo: '/dashboard',
+    //redirectTo: '/dashboard',
+    redirectTo: '/site',
     pathMatch: 'full'
   },
   {
@@ -99,7 +106,7 @@ const appRoutes: Routes = [
         ContextMenuComponent,
         BasicCustomContextMenuComponent,
         AnimatedCustomContextMenuComponent,
-        SubMenuCustomContextMenuComponent,
+        SubMenuCustomContextMenuComponent
         //ConfirmComponent
     ],
     imports: [
@@ -111,8 +118,9 @@ const appRoutes: Routes = [
             passThruUnknownUrl: true
         }),
         RouterModule.forRoot(appRoutes, {
-            scrollPositionRestoration: 'enabled',
-            relativeLinkResolution: 'legacy'
+            //scrollPositionRestoration: 'enabled',
+            //relativeLinkResolution: 'legacy',
+            //enableTracing: true
         }),
         NgbModule,
         ToastrModule.forRoot(),
@@ -125,7 +133,9 @@ const appRoutes: Routes = [
         CardSnippetModule,
         LayoutModule,
         ContentHeaderModule,
-        FacebookModule.forRoot()
+        FacebookModule.forRoot(),
+        SiteModule,
+        ConfirmModule
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

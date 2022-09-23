@@ -57,61 +57,7 @@ public class WebController : ControllerBase
         }
 
     }
-    [HttpPost]
-    [Route("getCompanyList")]
-    public async Task<string> GetCompanyList(FilterCompany filter)
-    {
-        //ViewBag.Message = "Your contact page.";
-        try
-        {
-            var resList =  await BusinessLogic.GetCompaniesList(filter);
-            var resp = JsonConvert.SerializeObject(new TokenWebResponse(resList, "GetCompanyList"));
-            return resp;
-
-
-
-
-        }
-        catch (Exception ex)
-        {
-            return JsonConvert.SerializeObject(new TokenWebResponse(ex.Message, "GetCompanyList"));
-        }
-
-    }
-    [HttpPost]
-    [Route("saveCompany")]
-    public string saveCompany(Company company)
-    {
-        //ViewBag.Message = "Your contact page.";
-        try
-        { 
-            var cmp = BusinessLogic.SaveCompany(company);
-            var resp = JsonConvert.SerializeObject(new TokenWebResponse(cmp, "SaveCompany"));
-            return resp;
-        }
-        catch (Exception ex)
-        {
-            return JsonConvert.SerializeObject(new TokenWebResponse(ex.Message, "SaveCompany"));
-        }
-
-    }
-    [HttpPost]
-    public string DeleteCompany(Company Company)
-    {
-        //ViewBag.Message = "Your contact page.";
-        try
-        {
-            //company.Valid = false;
-            var cmp = BusinessLogic.SaveCompany(Company);
-            var resp = JsonConvert.SerializeObject(new TokenWebResponse(cmp, "DeleteCompany"));
-            return resp;
-        }
-        catch (Exception ex)
-        {
-            return JsonConvert.SerializeObject(new TokenWebResponse(ex.Message, "DeleteCompany"));
-        }
-
-    }
+    
 
     [HttpPost]
     [Route("getUsersList")]
@@ -171,13 +117,13 @@ public class WebController : ControllerBase
     }
 
     [HttpPost]
-    [Route("getEventsList")]
-    public async Task<string> getEventsList(EventsViewModel viewmodel)
+    [Route("getUserEventsList")]
+    public async Task<string> getUserEventsList(EventsViewModel viewmodel)
     {
         //ViewBag.Message = "Your contact page.";
         try
         {
-            var resList = await BusinessLogic.GetEventsList(viewmodel);
+            var resList = await BusinessLogic.GetUserEventsList(viewmodel);
             var resp = JsonConvert.SerializeObject(new TokenWebResponse(resList, "GetEventsList"));
             return resp;
 
@@ -193,19 +139,273 @@ public class WebController : ControllerBase
     }
 
     [HttpPost]
-    [Route("saveEvent")]
-    public async Task<string> SaveEvent(EventSaveViewModel evenVm)
+    [Route("saveUserEvent")]
+    public async Task<string> SaveUserEvent(EventSaveViewModel evenVm)
     {
         //ViewBag.Message = "Your contact page.";
         try
         {
-            var cmp = await BusinessLogic.SaveEvent(evenVm);
+            var cmp = await BusinessLogic.SaveUserEvent(evenVm);
             var resp = JsonConvert.SerializeObject(new TokenWebResponse(cmp, "saveEvent"));
             return resp;
         }
         catch (Exception ex)
         {
             return JsonConvert.SerializeObject(new TokenWebResponse(ex.Message, "saveEvent"));
+        }
+
+    }
+
+    [HttpGet]
+    [Route("Test")]
+    public string Test()
+    {
+        //ViewBag.Message = "Your contact page.";
+        try
+        {
+            FilterCompany filter = new FilterCompany();
+            filter.Offset = 0;
+            filter.PageSize = 10;
+            var resList = BusinessLogic.GetCompaniesList(filter).Result;
+            var resp = JsonConvert.SerializeObject(new TokenWebResponse(resList, "GetCompanyList"));
+            return resp;
+
+        }
+        catch (Exception ex)
+        {
+            return JsonConvert.SerializeObject(new TokenWebResponse(ex.Message, "GetCompanyList"));
+        }
+
+    }
+    [HttpPost, DisableRequestSizeLimit]
+    [Route("SaveCompanyImage")]
+    public async Task<string> SaveCompanyImage() //string vectorViewModel
+    {
+        //ViewBag.Message = "Your contact page.";
+
+        try
+        {
+
+            MultipartParser multiformParsed;
+
+            multiformParsed = new MultipartParser(HttpContext.Request.Body, "IdCompany");
+            //using (stream = new MemoryStream())
+            //{
+            //    await Request.Body.CopyToAsync(stream);
+
+            //}
+            Company result = null;
+            string IdCompany = multiformParsed.AdditionalObject.ToString();
+            //var file = new System.IO.MemoryStream(multiformParsed.FileContents);
+            result = await BusinessLogic.SaveImageCompany(multiformParsed.FileContents, IdCompany);
+
+            if (result == null)
+                throw new Exception("Error on saving file");
+
+            return JsonConvert.SerializeObject(new TokenWebResponse(result, "SaveCompanyImage"));
+        }
+        catch (Exception ex)
+        {
+
+            return JsonConvert.SerializeObject(new TokenWebResponse(ex.Message, "SaveCompanyImage")); ;
+        }
+    }
+    [HttpPost]
+    [Route("getCompanyList")]
+    public async Task<string> GetCompanyList(FilterCompany filter)
+    {
+        //ViewBag.Message = "Your contact page.";
+        try
+        {
+            var resList = await BusinessLogic.GetCompaniesList(filter);
+            var resp = JsonConvert.SerializeObject(new TokenWebResponse(resList, "GetCompanyList"));
+            return resp;
+
+
+
+
+        }
+        catch (Exception ex)
+        {
+            return JsonConvert.SerializeObject(new TokenWebResponse(ex.Message, "GetCompanyList"));
+        }
+
+    }
+    [HttpPost]
+    [Route("saveCompany")]
+    public string saveCompany(FilterCompany filter)
+    {
+        //ViewBag.Message = "Your contact page.";
+        try
+        {
+            var cmp = BusinessLogic.SaveCompanyFilter(filter);
+            var resp = JsonConvert.SerializeObject(new TokenWebResponse(cmp, "SaveCompany"));
+            return resp;
+        }
+        catch (Exception ex)
+        {
+            return JsonConvert.SerializeObject(new TokenWebResponse(ex.Message, "SaveCompany"));
+        }
+
+    }
+    [HttpPost]
+    [Route("DeleteCompany")]
+    public string DeleteCompany(FilterCompany filter)
+    {
+        //ViewBag.Message = "Your contact page.";
+        try
+        {
+            var cmp = BusinessLogic.DeleteCompany(filter).Result;
+            var resp = JsonConvert.SerializeObject(new TokenWebResponse(cmp, "DeleteCompany"));
+            return resp;
+        }
+        catch (Exception ex)
+        {
+            return JsonConvert.SerializeObject(new TokenWebResponse(ex.Message, "DeleteCompany"));
+        }
+
+    }
+    [HttpPost]
+    [Route("CompanyBlackList")]
+    public string CompanyBlackList(FilterCompany filter)
+    {
+        //ViewBag.Message = "Your contact page.";
+        try
+        {
+            if (filter.CheckedCompanies == null || !filter.CheckedCompanies.Any())
+                throw new Exception("Checked Compamnies null");
+            var cmp = BusinessLogic.CompanyBlackList(filter).Result;
+            var resp = JsonConvert.SerializeObject(new TokenWebResponse(cmp, "CompanyBlackList"));
+            return resp;
+        }
+        catch (Exception ex)
+        {
+            return JsonConvert.SerializeObject(new TokenWebResponse(ex.Message, "CompanyBlackList"));
+        }
+
+    }
+    [HttpPost, DisableRequestSizeLimit]
+    [Route("SaveEventImage")]
+    public async Task<string> SaveEventImage() //string vectorViewModel
+    {
+        //ViewBag.Message = "Your contact page.";
+
+        try
+        {
+
+            MultipartParser multiformParsed;
+
+            multiformParsed = new MultipartParser(HttpContext.Request.Body, "IdEvent");
+            //using (stream = new MemoryStream())
+            //{
+            //    await Request.Body.CopyToAsync(stream);
+
+            //}
+            Event result = null;
+            string IdEvent = multiformParsed.AdditionalObject.ToString();
+            //var file = new System.IO.MemoryStream(multiformParsed.FileContents);
+            result = await BusinessLogic.SaveImageEvent(multiformParsed.FileContents, IdEvent);
+
+            if (result == null)
+                throw new Exception("Error on saving file");
+
+            return JsonConvert.SerializeObject(new TokenWebResponse(result, "SaveEventImage"));
+        }
+        catch (Exception ex)
+        {
+
+            return JsonConvert.SerializeObject(new TokenWebResponse(ex.Message, "SaveEventImage")); ;
+        }
+    }
+    [HttpPost]
+    [Route("GetEventsList")]
+    public async Task<string> GetEventsList(FilterEvent filter)
+    {
+        //ViewBag.Message = "Your contact page.";
+        try
+        {
+            var resList = await BusinessLogic.GetEventsList(filter);
+            var resp = JsonConvert.SerializeObject(new TokenWebResponse(resList, "getEventsList"));
+            return resp;
+
+
+
+
+        }
+        catch (Exception ex)
+        {
+            return JsonConvert.SerializeObject(new TokenWebResponse(ex.Message, "getEventsList"));
+        }
+
+    }
+    [HttpPost]
+    [Route("saveEvent")]
+    public string saveEvent(FilterEvent filter)
+    {
+        //ViewBag.Message = "Your contact page.";
+        try
+        {
+            var cmp = BusinessLogic.SaveEventFilter(filter);
+            var resp = JsonConvert.SerializeObject(new TokenWebResponse(cmp, "saveEvent"));
+            return resp;
+        }
+        catch (Exception ex)
+        {
+            return JsonConvert.SerializeObject(new TokenWebResponse(ex.Message, "saveEvent"));
+        }
+
+    }
+    [HttpPost]
+    [Route("DeleteEvent")]
+    public string DeleteEvent(FilterEvent filter)
+    {
+        //ViewBag.Message = "Your contact page.";
+        try
+        {
+            var cmp = BusinessLogic.DeleteEvent(filter).Result;
+            var resp = JsonConvert.SerializeObject(new TokenWebResponse(cmp, "DeleteEvent"));
+            return resp;
+        }
+        catch (Exception ex)
+        {
+            return JsonConvert.SerializeObject(new TokenWebResponse(ex.Message, "DeleteEvent"));
+        }
+
+    }
+    [HttpPost]
+    [Route("EventsBlackList")]
+    public string EventsBlackList(FilterEvent filter)
+    {
+        //ViewBag.Message = "Your contact page.";
+        try
+        {
+            if (filter.CheckedEvents == null || !filter.CheckedEvents.Any())
+                throw new Exception("Checked Events null");
+            var cmp = BusinessLogic.EventBlackList(filter).Result;
+            var resp = JsonConvert.SerializeObject(new TokenWebResponse(cmp, "EventsBlackList"));
+            return resp;
+        }
+        catch (Exception ex)
+        {
+            return JsonConvert.SerializeObject(new TokenWebResponse(ex.Message, "EventsBlackList"));
+        }
+
+    }
+    [HttpPost]
+    [Route("SendContact")]
+    //[ValidateAntiForgeryToken]
+    public string SendContact(ContactViewModel vmContact)
+    {
+        try
+        {
+            var us = BusinessLogic.Contact(vmContact);
+
+
+            return JsonConvert.SerializeObject(new TokenWebResponse(us, "SendContact"));
+        }
+        catch (Exception ex)
+        {
+            return JsonConvert.SerializeObject(new TokenWebResponse(ex.Message, "SendContact"));
         }
 
     }

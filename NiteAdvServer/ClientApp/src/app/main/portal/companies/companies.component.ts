@@ -30,13 +30,13 @@ export class CompaniesComponent implements OnInit {
   // public
   public contentHeader: object;
   public rows: any;
-  public selected = [];
+  //public selected = [];
   public kitchenSinkRows: any;
   //public basicSelectedOption: number = 10;
   public ColumnMode = ColumnMode;
   public expanded = {};
   public SelectionType = SelectionType;
-
+  public selectedCompanies :Company[];
   @ViewChild(DatatableComponent) table: DatatableComponent;
   @ViewChild('confirm') modal: ConfirmComponent;
   @ViewChild('company') companyForm: CompanyFormComponent;
@@ -55,7 +55,11 @@ export class CompaniesComponent implements OnInit {
     this.filter.PageSize =10;
     this.filter.Offset = 0;
     this.filter.Where ='';
+    this.filter.City ='World Wide';
+    this.filter.CheckedCompanies = new Array<Company>();
+    this.filter.CompanyToSave = new Company('');
     this.rows = new Array<Company>();
+    this.selectedCompanies = new Array<Company>();
     //this._coreTranslationService.translate(english, french, german, italian);
   }
 
@@ -77,6 +81,10 @@ export class CompaniesComponent implements OnInit {
         this.rows = [];
         this.rows = response.CompanyList;
         this.filter.TotalItems = response.ItemsCount;
+        this.selectedCompanies =[];
+        this.table.selected =[];
+        
+        //this.selected =[];
         this.blockUI.stop();
       }
     
@@ -84,15 +92,18 @@ export class CompaniesComponent implements OnInit {
       this.kitchenSinkRows = this.rows;
       this.exportCSVData = this.rows;*/
     });
+  
+
     this._companiesService.onCompanyMessage
     .pipe(takeUntil(this._unsubscribeAll))
     .subscribe(message=>{
       
-      if (message != '') {
+      if (message != null && message[1]!='') {
         this.blockUI.stop();
        // var comp = new ConfirmComponent(this.modalService);
        // comp.openDialog("Messaggio", message,false);
-      this.modal.openDialog("Error",message,true);
+       var title = message[0]? "Errore":"Messaggio";
+      this.modal.openDialog(title,message[1],message[0]);
       }
      
     });
@@ -135,15 +146,8 @@ export class CompaniesComponent implements OnInit {
     if (event.type == "search")
     {
       // filter our data
-      // const temp = this.tempData.filter(function (d) {
-      //   return d.full_name.toLowerCase().indexOf(val) !== -1 || !val;
-      // });
-      // update the rows
-      //this.kitchenSinkRows = temp;
       this.filter.Offset =0;
       this._companiesService.getDataTableRows(this.filter);
-      // Whenever the filter changes, always go back to the first page
-      //this.table.offset = 0;
     }
     
   }
@@ -162,17 +166,46 @@ export class CompaniesComponent implements OnInit {
    */
   onSelect({ selected }) {
     //console.log('Select Event', selected, this.selected);
-    this.companyForm.openDialog(selected[0],()=>{
-
-      this. fullPageBlockUI();
+    this.selectedCompanies =[];
+    selected.forEach(element => {
+      this.selectedCompanies.push(element);
     });
+    
+  }
+  Edit(event) {
+    //console.log('Select Event', selected, this.selected);
+    if (this.selectedCompanies != null && this.selectedCompanies.length >0)
+    {
+      var cmp = this.selectedCompanies[0];
+      this.companyForm.openDialog(cmp,()=>{
+
+        this. fullPageBlockUI();
+      });
+    }
+    else{ this._companiesService.onCompanyMessage.next([true,'Select a row before proceed']);
+    }
   //this.selected.splice(0, this.selected.length);
   //  this.selected.push(...selected);
   }
-
+  AddToBlackList(event) {
+    if (this.selectedCompanies != null && this.selectedCompanies.length >0)
+    {
+      this. fullPageBlockUI();
+      this.filter.CheckedCompanies = this.selectedCompanies;
+      this._companiesService.CompanyBlackList(this.filter);
+    }
+    else{ this._companiesService.onCompanyMessage.next([true,'Select a row before proceed']);}
+  }
   onSelectedSizeChange(size)
   {
     this.filter.PageSize = size || 10;
+    this._companiesService.getDataTableRows(this.filter);
+  }
+  onSelectedCityChange(city)
+  {
+    this.filter.Offset = 0;
+ 
+       this.filter.City = city;
     this._companiesService.getDataTableRows(this.filter);
   }
   /**
@@ -191,4 +224,10 @@ export class CompaniesComponent implements OnInit {
     this.filter.TotalItems = pageInfo.count || 10;
     this._companiesService.getDataTableRows(this.filter);
   }
+  getRowClass = (row) => {    
+    return {
+      'row-blacklist': row.IsInBlackList,
+      'row-deleted ': row.Deleted,
+    };
+   }
 }

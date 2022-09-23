@@ -25,8 +25,9 @@ public static class Logger
                 //sendMail
                 //if (MailingListLogger != null && MailingListLogger.Any())
                 //{
-                //    MailingListLogger.ForEach(x => {
-                //       //string body = "Dal processo automatico delle scansioni delle bolle sono state trovate mancate associazioni dei seguenti  file:\n  " + logMessage;
+                //    MailingListLogger.ForEach(x =>
+                //    {
+                //        //string body = "Dal processo automatico delle scansioni delle bolle sono state trovate mancate associazioni dei seguenti  file:\n  " + logMessage;
                 //        MailHelper.SendMail("marco.bazzoli@outlook.it", x, "Messaggio Servizio Cora", logMessage); //marco@assistenzacora.it
                 //    });
                 //}

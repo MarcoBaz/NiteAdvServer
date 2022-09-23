@@ -26,7 +26,20 @@ export class EventCalendar {
       addGuest: []
     };
   }
+  export class FilterEvent {
+    EventToSave: Event;
+    City: string;
+    Where: string;
+    Offset: number;
+    PageSize: number;
+    TotalItems: number;
+    CheckedEvents: Event[];
+}
 
+export class EventResponse{
+     EventList: Event[];
+     ItemsCount :number;
+}
   export class Event{
   
     constructor(event) {
@@ -38,7 +51,7 @@ export class EventCalendar {
       this.Name = event.Name || '';
       this.Description = event.Description || '';
       this.StartTimestamp = event.StartTimestamp || 0;
-      this.EndTimestamp = event.EndTimestamp || '';
+      this.EndTimestamp = event.EndTimestamp || 0;
       this.Latitude = event.Latitude || 0;
       this.Longitude = event.Longitude || 0;
       this.Image = event.Image || '';
@@ -51,7 +64,8 @@ export class EventCalendar {
       this.UsersInterested = event.UsersInterested || 0;
       this.AllDay = event.AllDay || false;
       this.LastSyncDate = event.LastSyncDate || new Date().valueOf();
-      
+      this.IsInBlackList = event.IsInBlackList || false;
+      this.Deleted = event.Deleted || false;
   }
     id: string;
     pk:string;
@@ -73,6 +87,8 @@ export class EventCalendar {
     UsersGoing: number;
     UsersInterested: number;
     AllDay: boolean;
+    IsInBlackList: boolean;
+    Deleted: boolean;
   }
 export class EventsViewModel {
     IdUser: string;

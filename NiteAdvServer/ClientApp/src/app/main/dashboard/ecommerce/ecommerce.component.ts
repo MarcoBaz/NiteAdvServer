@@ -12,6 +12,7 @@ import { locale as english } from 'app/main/dashboard/i18n/en';
 import { locale as french } from 'app/main/dashboard/i18n/fr';
 import { locale as german } from 'app/main/dashboard/i18n/de';
 import { locale as italian } from 'app/main/dashboard/i18n/it';
+import { ScriptService } from 'app/main/site/scripts/script.service';
 
 @Component({
   selector: 'app-ecommerce',
@@ -73,11 +74,12 @@ export class EcommerceComponent implements OnInit {
     private _authenticationService: AuthenticationService,
     private _dashboardService: DashboardService,
     private _coreConfigService: CoreConfigService,
-    private _coreTranslationService: CoreTranslationService
+    private _coreTranslationService: CoreTranslationService,
+    private _scriptService:ScriptService
   ) {
     this._authenticationService.currentUser.subscribe(x => (this.currentUser = x));
-    this.isAdmin = this._authenticationService.isAdmin;
-    this.isClient = this._authenticationService.isClient;
+    this.isAdmin = true; //this._authenticationService.isAdmin;
+    this.isClient = false; //this._authenticationService.isClient;
 
     this._coreTranslationService.translate(english, french, german, italian);
     // Statistics Bar Chart
@@ -669,6 +671,23 @@ export class EcommerceComponent implements OnInit {
         }
       ]
     };
+    this._coreConfigService.config = {
+      layout: {
+        navbar: {
+          hidden: false
+        },
+        menu: {
+          hidden: false
+        },
+        footer: {
+          hidden: false
+        },
+        customizer: false,
+        enableLocalStorage: true
+      }
+    };
+    this._scriptService.unloadCss();
+    this._scriptService.unloadScripts();
   }
 
   // Lifecycle Hooks

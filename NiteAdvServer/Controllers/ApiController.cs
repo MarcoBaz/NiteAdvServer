@@ -112,11 +112,11 @@ namespace NiteAdvServer.Controllers
         }
         [HttpGet]
         [Route("GetFirstAvailableStatus")]
-        public string GetFirstAvailableStatus()
+        public string GetFirstAvailableStatus(int IdConfig, string City)
         {
             if (checkAuthentication())
             {
-                var status = BusinessLogic.GetFirstAvailableStaus();
+                var status = BusinessLogic.GetFirstAvailableStatus(IdConfig,City);
                 return JsonConvert.SerializeObject(status);
 
             }
