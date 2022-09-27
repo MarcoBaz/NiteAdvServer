@@ -1,0 +1,38 @@
+<nav class="st-nav navbar main-nav navigation fixed-top" id="main-nav">
+    <div class="container">
+        <ul class="st-nav-menu nav navbar-nav">
+            <li class="st-nav-section nav-item"><a (click)="loadRoute('main')" class="navbar-brand"><img src="assets/site/img/logo-sticky.png" alt="" class="logo logo-sticky d-inline-block d-md-none"> <img src="assets/site/img/logo.png" alt="" class="logo d-none d-md-inline-block"></a></li>
+            <li class="st-nav-section st-nav-primary nav-item">
+                <a class="st-root-link nav-link active" (click)="loadRoute('main')">Home</a> 
+                <a class="st-root-link nav-link" (click)="loadRoute('about')">About</a> 
+                <!-- <a class="st-root-link nav-link" (click)="loadRoute('main')">Città</a>  -->
+                <a class="st-root-link nav-link" (click)="loadRoute('contacts')">Contatti</a> 
+            </li>
+            <li class="st-nav-section st-nav-secondary nav-item">
+                <a class="btn btn-rounded btn-outline me-3 px-3" (click)="loadRoute('login')"><i class="fas fa-sign-in-alt d-none d-md-inline me-md-0 me-lg-2"></i> <span class="d-md-none d-lg-inline">Accedi o Registrati</span> </a>
+                <!-- <a class="btn btn-rounded btn-solid px-3" href="/"><i class="fas fa-user-plus d-none d-md-inline me-md-0 me-lg-2"></i> <span class="d-md-none d-lg-inline">Registrati</span></a> -->
+            </li><!-- Mobile Navigation -->
+            <li class="st-nav-section st-nav-mobile nav-item">
+                <button class="st-root-link navbar-toggler" type="button"><span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span></button>
+                <div class="st-popup">
+                    <div class="st-popup-container"><a class="st-popup-close-button">Close</a>
+                        <div class="st-dropdown-content-group">
+                            <h4 class="text-uppercase regular"></h4>
+                            <a class="regular text-secondary" (click)="loadRoute('main')"><i class="fa-solid fa-house fas me-2"></i>Home</a>
+                            <a class="regular text-secondary" (click)="loadRoute('about')"><i class="far fa-building me-2"></i> About </a>
+                            <!-- <a class="regular text-secondary" (click)="loadRoute('main')"><i class="fas fa-location-dot me-2"></i> Città </a> -->
+                            <a class="regular text-secondary" (click)="loadRoute('contacts')"><i class="far fa-envelope me-2"></i> Contatti </a>
+                        </div>
+                    
+                        <div class="st-dropdown-content-group bg-primary">
+                            <a class="regular text-contrast" (click)="loadRoute('login')"><i class="fas fa-sign-in-alt me-2"></i>Accedi / Registrati</a></div>
+                    </div>
+                </div> 
+            </li>
+        </ul>
+    </div>
+    <div class="st-dropdown-root">   
+    <div class="st-dropdown-container">
+    </div> 
+    </div>
+</nav>

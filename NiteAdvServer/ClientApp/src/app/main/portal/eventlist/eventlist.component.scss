@@ -1,0 +1,17 @@
+@import '@core/scss/angular/libs/datatables.component.scss';
+
+.datatable-scroll {
+  width: auto !important;
+}
+.datatable-body-cell-label {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.row-blacklist {
+  background-color: lightgray !important;
+
+}
+.row-deleted {
+  background-color:lightcoral!important;
+}

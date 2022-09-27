@@ -1,0 +1,142 @@
+<ng-template #modalForm let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="myModalLabel1">{{event.Name}}</h4>
+      <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <form class="form" [formGroup]="eventlistForm">
+    <div class="modal-body" tabindex="0" ngbAutofocus>
+        
+            <input Type="hidden" name="id" formControlName="id">
+            <input Type="hidden" name="LastSyncDate" formControlName="LastSyncDate">
+            <!--<input Type="hidden" name="Canceled" formControlName="Canceled">-->
+            <div class="row">
+              <div class="col-md-12 col-24">
+                <img src="{{event.Image}}" style="width:100%;max-height: 300px;"/>
+              </div>
+              <div class="col-md-6 col-12">
+                <div class="form-group">
+                  <fieldset class="form-group">
+                    <label for="file-upload-single">Image:</label>
+                    <div class="custom-file">
+                      <input
+                        type="file"
+                        class="custom-file-input"
+                        type="file"
+                        ng2FileSelect
+                        [uploader]="uploader"
+                        (onFileSelected)="onFileSelected($event)"
+                        id="file-upload-single"
+                      />
+                      <label class="custom-file-label">{{filename}}</label>
+                    </div>
+                  </fieldset>
+                </div>
+              </div>
+              <div class="col-md-6 col-12">
+                <!-- <div class="form-group">
+                  <label for="Place">Place:</label>
+                  <input type="text" formControlName="Place" class="form-control" placeholder="Place" name="Place" />
+              </div> -->
+       
+                
+              </div>
+              <div class="col-md-6 col-12">
+                <div class="form-group">
+                    <label for="StartTimestamp">Start Date (unix format)</label>
+                    <input type="text" formControlName="StartTimestamp" class="form-control" placeholder="StartTimestamp" name="StartTimestamp" />
+                </div>
+              </div>
+             <div class="col-md-6 col-12">
+                <div class="form-group">
+                  <label for="EndTimestamp">End Date (unix format)</label>
+                  <input type="text"  formControlName="EndTimestamp" class="form-control" placeholder="EndTimestamp"  name="EndTimestamp" />
+                </div>
+              </div> 
+              <div class="col-md-12 col-24">
+                <div class="form-group">
+                  <label for="Place">Place</label>
+                  <input type="text"  formControlName="Place" class="form-control" placeholder="Place"  name="Place" />
+                </div>
+              </div> 
+              <div class="col-md-6 col-12">
+                <div class="form-group">
+                  <label for="Latitude">Latitude</label>
+                  <input type="text"  formControlName="Latitude" class="form-control" placeholder="Latitude"  name="Latitude" />
+                </div>
+              </div>
+              <div class="col-md-6 col-12">
+                <div class="form-group">
+                  <label for="Longitude">Longitude</label>
+                  <input type="text" formControlName="Longitude" class="form-control" placeholder="Longitude" name="Longitude" />
+                </div>
+              </div>
+              <div class="col-md-6 col-12">
+              
+                <div class="form-group">
+                  <label for="CategoryType">Type (Discovered Categories: {{event.DiscoveryCategories}})</label>
+                  <select class="form-control" formControlName="CategoryType" [value]="CategoryType">
+                    <option>club</option>
+                    <option>concert</option>
+                    <option>theater</option>
+                    <option>festival</option>
+                  </select> 
+                 
+              </div>
+              </div>
+              <div class="col-md-6 col-12">
+                <div class="form-group">
+                    <label for="TicketUrl">TicketUrl</label>
+                    <input type="text" id="TicketUrl" class="form-control" placeholder="TicketUrl" name="TicketUrl" />
+                </div>
+              </div>
+              <div class="col-md-12 col-24">
+                <div class="form-group">
+                    <label>Description</label> <!--[(ngModel)]="descriptionEditor" -->
+                    <quill-editor [(ngModel)]="descriptionEditor" [modules]="{ syntax: true, toolbar: [['code-block']] }"  [ngModelOptions]="{standalone: true}"  [styles]="{height: '250px'}">
+                      <div quill-editor-toolbar>
+                              <span class="ql-formats">
+                                <button class="ql-bold" [title]="'Bold'"></button>
+                                <button class="ql-italic" [title]="'italic'"></button>
+                                <button class="ql-underline" [title]="'underline'"></button>
+                              </span>
+                              <span class="ql-formats">
+                                <select class="ql-align" [title]="'Alignment'">
+                                  <option selected></option>
+                                  <option value="center"></option>
+                                  <option value="right"></option>
+                                  <option value="justify"></option>
+                                </select>
+                              </span>
+                              <span class="ql-formats">
+                                <button class="ql-list" value="ordered" type="button"></button>
+                              </span>
+                              <span class="ql-formats">
+                                <button class="ql-link" value="ordered" type="button"></button>
+                                <button class="ql-image" value="ordered" type="button"></button>
+                                <button class="ql-video" value="ordered" type="button"></button>
+                              </span>
+                              <span class="ql-formats">
+                                <button class="ql-formula" value="ordered" type="button"></button>
+                                <button class="ql-code-block" value="ordered" type="button"></button>
+                              </span>
+                              <span class="ql-formats">
+                                <button class="ql-clean" value="ordered" type="button"></button>
+                              </span>
+                            </div>
+                    </quill-editor>
+                </div>
+              </div>
+            </div>
+           
+    
+    </div>
+    <div class="modal-footer">
+       
+        <button type="delete" rippleEffect class="btn btn-outline-secondary" rippleEffect (click)="closeForm('delete',eventlistForm)">Delete</button>
+        <button type="submit" rippleEffect class="btn btn-primary mr-1" rippleEffect (click)="closeForm('save',eventlistForm)">Submit</button>
+    </div> 
+   </form>
+  </ng-template>
+

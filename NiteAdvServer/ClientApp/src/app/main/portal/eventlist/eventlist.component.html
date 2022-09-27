@@ -1,0 +1,194 @@
+<div class="content-wrapper container-xxl p-0">
+    <div class="content-body">
+      <confirm-modal #confirm></confirm-modal>
+      <eventlist-form #eventlist></eventlist-form> 
+      <block-ui> </block-ui>
+      <!-- content-header component 
+      -->
+      <!-- Kitchen Sink Datatables id="ngx-datatable-kitchen-sink" [snippetCode]="_snippetCodeKitchenSink">-->
+  
+      <app-content-header [contentHeader]="contentHeader"></app-content-header>
+      <section id="card-demo-example">
+        <div class="card">
+          
+          <div class="card-body">
+          <!-- <h4 class="card-title">Companies</h4>-->
+          <div class="row">
+          <div class="col-12 mb-50">
+              <button class="btn btn-primary ml-1" rippleEffect (click)="Edit($event)">
+                <i data-feather="edit" class="mr-0 mr-sm-1"></i
+                ><span class="d-none d-sm-inline-block">Edit</span>
+              </button>
+              <button class="btn btn-secondary ml-1" rippleEffect (click)="AddToBlackList($event)">
+                <i data-feather="plus" class="mr-0 mr-sm-1"></i
+                ><span class="d-none d-sm-inline-block">Add/Remove To Black List</span>
+              </button>
+            </div>
+            <div class="col-md-3 col-6">
+              <div class="d-flex justify-content-between align-items-center m-1">
+                <label class="d-flex align-items-center"
+                  >Show
+                  <select class="form-control mx-25" [(ngModel)]="filter.PageSize" (ngModelChange)="onSelectedSizeChange($event)">
+                    <option value="10">10</option>
+                    <option value="25">25</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                  </select>
+                  entries</label
+                >
+              </div>
+            </div>
+            <div class="col-md-3 col-6">
+              <div class="d-flex justify-content-between align-items-center m-1">
+                <div ngbDropdown [placement]="'bottom-right'" class="btn-group dropup">
+                  <label class="d-flex align-items-center">Selected City</label>
+                  <button
+                  ngbDropdownToggle
+                  class="btn btn-primary"
+                  type="button"
+                  id="dropdownMenuButton902"
+                  rippleEffect style="margin-left:10px ;">
+                  {{filter.City}}
+                </button>
+                <div ngbDropdownMenu aria-labelledby="dropdownMenuButton902">
+                  <a ngbDropdownItem (click)="onSelectedCityChange('World Wide')">World Wide</a>
+                  <div class="dropdown-divider"></div>
+                  <h6 class="dropdown-header">Italy</h6>
+                  <a ngbDropdownItem (click)="onSelectedCityChange('Milano')">Milano</a>
+                  <a ngbDropdownItem (click)="onSelectedCityChange('Roma')">Roma</a>
+                  <a ngbDropdownItem (click)="onSelectedCityChange('Firenze')">Firenze</a>
+                  <a ngbDropdownItem (click)="onSelectedCityChange('Torino')">Torino</a>
+                  <div class="dropdown-divider"></div>
+                  <h6 class="dropdown-header">UK</h6>
+                  <a ngbDropdownItem (click)="onSelectedCityChange('London')">London</a>
+                  <a ngbDropdownItem (click)="onSelectedCityChange('Manchester')">Manchester</a>
+                  <a ngbDropdownItem (click)="onSelectedCityChange('Glasgow')">Glasgow</a>
+                  <a ngbDropdownItem (click)="onSelectedCityChange('Edimburgh')">Edimburgh</a>
+                  <div class="dropdown-divider"></div>
+                  <!-- <h6 class="dropdown-header">Usa</h6>
+                  <a ngbDropdownItem (click)="onSelectedCityChange('New York')">New York</a>
+                  <a ngbDropdownItem (click)="onSelectedCityChange('Los Angeles')">Los Angeles</a>
+                  <a ngbDropdownItem (click)="onSelectedCityChange('San Francisco')">San Francisco</a>-->
+                </div> 
+                </div>
+            </div>
+            </div>
+            
+  
+            <div class="col-md-6 col-12 d-flex justify-content-md-end">
+              <div class="d-flex align-items-center justify-content-end pr-1 pb-1 pl-1 pl-md-0 pb-md-0">
+                <label class="d-flex align-items-center"
+                  >Search<input
+                    type="search"
+                    placeholder="Search"
+                    [(ngModel)]="filter.Where"
+                    class="form-control ml-25"
+                    (keyup)="filterUpdate($event)"
+                    (search)="filterUpdate($event)"
+                /></label>
+              </div>
+            </div>
+          </div>
+          <!--  -->
+          <ngx-datatable
+            [rows]="rows"
+            [rowHeight]="58"
+            [rowClass]="getRowClass"
+            class="bootstrap core-bootstrap"
+            [columnMode]="ColumnMode.force"
+            [headerHeight]="40"
+            [footerHeight]="50"
+            [scrollbarH]="true"
+            [selectionType]="SelectionType.checkbox"
+            [limit]="filter.PageSize"
+            [count]="filter.TotalItems"
+            [externalPaging]="true"
+            [offset]="filter.Offset"
+            (page)="datatablePageData($event)"
+            (activate)="onActivate($event)"
+            (select)="onSelect($event)"
+            
+          >
+   
+          <ngx-datatable-column
+          [width]="50"
+          [sortable]="false"
+          [canAutoResize]="false"
+          [draggable]="false"
+          [resizeable]="false"
+        >
+          <ng-template
+            ngx-datatable-header-template
+            let-value="value"
+            let-allRowsSelected="allRowsSelected"
+            let-selectFn="selectFn"
+          >
+          <!--  -->
+            <div class="custom-control custom-checkbox">
+              <input
+                type="checkbox"
+                class="custom-control-input"
+                [checked]="allRowsSelected"
+                (change)="selectFn(!allRowsSelected)"
+                id="headerChkbxRef"
+              />
+              <label class="custom-control-label" for="headerChkbxRef"></label>
+            </div>
+          </ng-template>
+          <ng-template
+            ngx-datatable-cell-template
+            let-rowIndex="rowIndex"
+            let-value="value"
+            let-isSelected="isSelected"
+            let-onCheckboxChangeFn="onCheckboxChangeFn"
+          >
+          <!-- "-->
+            <div class="custom-control custom-checkbox">
+              <input
+                type="checkbox"
+                class="custom-control-input"
+                [checked]="isSelected"
+                (change)="onCheckboxChangeFn($event)"
+                id="rowChkbxRef{{ rowIndex }}"
+              />
+              <label class="custom-control-label" for="rowChkbxRef{{ rowIndex }}"></label>
+            </div>
+          </ng-template>
+        </ngx-datatable-column>
+            <ngx-datatable-column name="id" prop="id" [width]="120"></ngx-datatable-column>
+            <ngx-datatable-column name="Name" prop="Name" [width]="250"></ngx-datatable-column>
+             <ngx-datatable-column name="StartTimestamp" [width]="100">
+              <ng-template let-column="column" ngx-datatable-header-template>
+                <span>Start Date</span>
+              </ng-template>
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                {{row.StartTimestamp}}
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="EndTimestamp" [width]="100">
+              <ng-template let-column="column" ngx-datatable-header-template>
+                <span>End Date</span>
+              </ng-template>
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                {{row.EndTimestamp}}
+              </ng-template>
+            </ngx-datatable-column> 
+
+            <ngx-datatable-column name="Url" prop="Url" [width]="120">
+                    <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                      <a  class="nav-link edit" href="{{row.Url}}" target="_blank">
+                        {{row.Url}}
+                      </a>
+                    </ng-template>
+            </ngx-datatable-column>
+           
+          </ngx-datatable>
+        </div>
+      </div>
+      </section>
+      <!--/ Kitchen Sink Datatables -->
+  
+    </div>
+  </div>
+  
+  

@@ -1,0 +1,14 @@
+<navbar></navbar>
+<main class="overflow-hidden">
+   
+    <!-- ./App Landing - page header -->
+    <main-page *ngIf="ShowHome==true"></main-page>
+    <login *ngIf="ShowLogin==true"></login>
+    <contacts *ngIf="ShowContacts==true"></contacts>
+    <cookies *ngIf="ShowCookies==true"></cookies>
+    <privacy *ngIf="ShowPrivacy==true"></privacy>
+    <about *ngIf="ShowAbout==true"></about>
+    <!-- ./Footer - Headline -->
+   <app-footer *ngIf="ShowLogin==false"></app-footer>
+   <confirm-modal #confirm></confirm-modal>
+</main><!-- themeforest:js -->

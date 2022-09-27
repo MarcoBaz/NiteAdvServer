@@ -1,0 +1,23 @@
+<footer class="site-footer section bg-darker text-contrast block bg-contrast">
+    <div class="container p-5 nite-footer" style="display: flex;">
+        <div class="col-12 col-lg-4">
+                <img src="assets/site/img/logo-light.png" alt="" class="logo">
+        </div>
+        <div class="col-12 col-lg-4">
+            <p class="m-0" style="line-height: 1.6!important;"><b>NiteAdvisor srl</b><br>
+                Via Contrada Gatti, 38 - Milano (MI)<br>
+                IT 76945660645<br>
+                <br><br>
+                <a (click)="loadRoute('privacy')"><u>Privacy Policy</u></a> - <a (click)="loadRoute('cookies')"><u>Cookie Policy</u></a></p>
+        </div>
+         <div class="col-12 col-lg-4 mobile-hide">
+            <p class="m-0"><b>MENU</b></p>
+            <div class="vertical-menu">
+                <a (click)="loadRoute('home')">Home</a>
+                <a (click)="loadRoute('about')">About</a>
+                <!-- <a (click)="loadRoute('home')" class="active">Città</a> -->
+                <a (click)="loadRoute('contacts')">Contatti</a>
+            </div>
+        </div>
+    </div>
+</footer>

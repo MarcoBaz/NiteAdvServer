@@ -1,0 +1,99 @@
+        <!-- ./Page header -->
+        <header class="page header text-contrast nite-bg-dark">
+            <div class="container pb-9">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h1 class="bold display-md-4 text-contrast mb-4">Contatti</h1>
+                        <p class="lead semi-bold text-secondary">Compila il form per contattarci e farci sapere come possiamo aiutarti. Ti ricontatteremo al più presto.</p>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <div class="position-relative">
+            <div class="shape-divider shape-divider-bottom shape-divider-fluid-x text-contrast"><svg viewBox="0 0 2880 48" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M0 48H1437.5H2880V0H2160C1442.5 52 720 0 720 0H0V48Z"></path>
+                </svg></div>
+        </div><!-- ./Contact Us -->
+        <section class="section mt-n7">
+            <div class="container bring-to-front pt-0">
+                <div class="row align-items-center gap-y">
+                    <div class="col-md-6">
+                        <div class="shadow bg-contrast p-5 rounded">
+                            <form [formGroup]="contactForm"  class="form form-contact">
+                                <div class="mb-4"><label for="contact_email" class="text-dark bold mb-0">Email</label>
+                                    <div id="emailHelp" class="small form-text text-secondary mt-0 mb-2 italic">Non condivideremo mai la tua email con nessun altro.</div>
+                                    <div class="form-group">
+                                       
+                                        <input
+                                          type="text"
+                                          formControlName="email"
+                                          class="form-control bg-contrast"
+                                          [ngClass]="{ 'is-invalid': submitted && f.email.errors }"
+                                          aria-describedby="login-email"
+                                          autofocus=""
+                                          placeholder="mario@rossi.it"
+                                          tabindex="1"
+                                          required
+                                        />
+                                        <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                                          <div *ngIf="f.email.errors.required">l'Email è richiesta</div>
+                                          <div *ngIf="f.email.errors.email">l'Email deve essere un indirizzo valido</div>
+                                        </div>
+                                      </div>
+                                    <!-- <input type="email" name="Contact[email]" id="contact_email" class="form-control bg-contrast" placeholder="mario@rossi.it" required> -->
+                                </div>
+                                <fieldset>
+                                    <div class="mb-4"><label for="contact_client" class="text-dark bold">Sei</label>
+                                    <div class="form-group">
+                                        <div class="form-check-list">
+                                            <div class="radio form-check-inline radio-inline"><input type="radio" id="privato" name="client" required checked> <label for="privato">Un privato</label></div>
+                                            <div class="radio form-check-inline radio-inline"><input type="radio" id="proprietario" name="client" required> <label for="proprietario">Un proprietario di locale</label></div>
+                                        </div></div>
+                                    </div>
+                                </fieldset>
+                                <div class="mb-4"><label for="contact_email" class="text-dark bold">Come possiamo aiutarti?</label> 
+                                    <div class="form-group">
+                                       
+                                        <textarea
+                                          type="text"
+                                          formControlName="text"
+                                          class="form-control bg-contrast"
+                                          [ngClass]="{ 'is-invalid': submitted && f.email.errors }"
+                                          aria-describedby="login-email"
+                                          autofocus=""
+                                          placeholder="Descrivi la tua richiesta o problematica"
+                                          tabindex="1"
+                                          rows="8" required></textarea>
+                                        <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                                          <div *ngIf="f.text.errors.required">La descrizione è obbligatoria</div>
+                                        </div>
+                                      </div>
+                                    <!-- <textarea name="Contact[message]" id="contact_message" class="form-control bg-contrast" placeholder="Descrivi la tua richiesta o problematica" rows="8" required></textarea> -->
+                                </div>
+                                <div class="d-grid gap-2">
+                                    <!-- <button id="contact-submit" data-loading-text="Sending..." name="submit" type="submit" class="btn btn-primary btn-rounded">Invia</button> -->
+                                    <button [disabled]="loading" class="btn btn-primary btn-rounded" (click)="onSubmit()" rippleEffect>
+                                        <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>Invia
+                                      </button>
+                                </div>
+                            </form>
+                            <!-- <div class="response-message">
+                                <div class="section-heading"><i class="fas fa-check font-lg"></i>
+                                    <p class="font-md m-0">Grazie!</p>
+                                    <p class="response">Il tuo messaggio è stato inviato, ti ricontatteremo al più presto.</p>
+                                </div>
+                            </div> -->
+                        </div>
+                    </div>
+                    <div class="col-md-5 ms-md-auto p-5">
+                        <div class="d-flex mt-5 mb-4"><i class="fas fa-map-marker font-l text-primary me-3"></i>
+                            <div class="flex-fill"><span class="text-dark bold">NiteAdvisor srl</span><br>Via Contrada Gatti, 38<span class="d-block">Milano (MI)</span></div>
+                        </div>
+                        <div class="d-flex"><i class="fas fa-envelope font-l text-primary me-3"></i>
+                            <div class="flex-fill mb-5"><a href="mailto:info@niteadvisor.itt">info@niteadvisor.it</a></div>
+                        </div>
+                        <nav class="nav justify-content-md-start"><a href="#" class="btn btn-circle btn-secondary btn-sm me-3"><i class="fab fa-facebook"></i></a> <a href="#" class="btn btn-circle btn-secondary btn-sm me-3"><i class="fab fa-twitter"></i></a> <a href="#" class="btn btn-circle btn-secondary btn-sm"><i class="fab fa-instagram"></i></a></nav>
+                    </div>
+                </div>
+            </div>
+        </section><!-- ./Other contact channels -->
