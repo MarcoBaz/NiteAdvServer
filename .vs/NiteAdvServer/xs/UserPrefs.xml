@@ -1,19 +1,23 @@
 ﻿<Properties StartupConfiguration="{79474FA2-A158-48F0-AA69-61A7E940F600}|Default">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Release" />
-  <MultiItemStartupConfigurations />
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.Workbench ActiveDocument="NiteAdvServerCore/Managers/BusinessLogic.cs">
+  <Xamarin.Addins.Core.Project ActiveDebugTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget." />
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Release" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="NiteAdvServerCore/DTO/CompanyDTO.cs">
     <Files>
-      <File FileName="NiteAdvServer/Controllers/WebController.cs" Line="307" Column="1" IsPinned="True" />
-      <File FileName="NiteAdvServerCore/Managers/BusinessLogic.cs" Line="153" Column="47" IsPinned="True" />
+      <File FileName="NiteAdvServer/Controllers/WebController.cs" Line="220" Column="57" IsPinned="True" />
+      <File FileName="NiteAdvServerCore/Managers/BusinessLogic.cs" Line="140" Column="29" IsPinned="True" />
       <File FileName="NiteAdvServerCore/Managers/GremlinManager.cs" Line="209" Column="1" IsPinned="True" />
       <File FileName="NiteAdvServer/ClientApp/package.json" Line="10" Column="114" IsPinned="True" />
-      <File FileName="NiteAdvServer/Controllers/ApiController.cs" Line="119" Column="54" IsPinned="True" />
+      <File FileName="NiteAdvServer/Controllers/ApiController.cs" Line="119" Column="61" IsPinned="True" />
       <File FileName="NiteAdvServerCore/Managers/Logger.cs" Line="30" Column="54" />
       <File FileName="NiteAdvServerCore/Managers/MailManager.cs" Line="1" Column="1" />
       <File FileName="NiteAdvServerCore/DTO/SqlServer/ConfigDTO.cs" Line="9" Column="19" />
       <File FileName="NiteAdvServerCore/Entities/SqlServer/Config.cs" Line="1" Column="1" />
       <File FileName="NiteAdvServerCore/Entities/SqlServer/City.cs" Line="1" Column="1" />
+      <File FileName="NiteAdvServerCore/DTO/EventDTO.cs" Line="9" Column="32" />
+      <File FileName="NiteAdvServerCore/DTO/VertexDTO.cs" Line="9" Column="18" />
+      <File FileName="NiteAdvServerCore/DTO/CompanyDTO.cs" Line="33" Column="42" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -21,12 +25,16 @@
           <Node name="NiteAdvServer" expanded="True">
             <Node name="NiteAdvServer" expanded="True">
               <Node name="Controllers" expanded="True" />
+              <Node name="Properties" expanded="True">
+                <Node name="PublishProfiles" expanded="True" />
+              </Node>
               <Node name="ViewModel" expanded="True" />
               <Node name="appsettings.json" expanded="True" />
             </Node>
             <Node name="NiteAdvServerCore" expanded="True">
               <Node name="DTO" expanded="True">
                 <Node name="SqlServer" expanded="True" />
+                <Node name="CompanyDTO.cs" selected="True" />
               </Node>
               <Node name="Entities" expanded="True">
                 <Node name="SqlServer" expanded="True" />
@@ -45,14 +53,13 @@
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.ItemProperties.NiteAdvServer PreferredExecutionTarget="/Applications/Safari.app" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
       <Breakpoint file="/Users/mac/Projects/NiteAdvServer/NiteAdvServerCore/Managers/CosmosManager.cs" relfile="NiteAdvServerCore/Managers/CosmosManager.cs" line="184" column="1" />
-      <Breakpoint file="/Users/mac/Projects/NiteAdvServer/NiteAdvServerCore/Managers/BusinessLogic.cs" relfile="NiteAdvServerCore/Managers/BusinessLogic.cs" line="212" column="1" />
+      <Breakpoint file="/Users/mac/Projects/NiteAdvServer/NiteAdvServerCore/Managers/BusinessLogic.cs" relfile="NiteAdvServerCore/Managers/BusinessLogic.cs" line="209" column="1" />
       <Breakpoint file="/Users/mac/Projects/NiteAdvServer/NiteAdvServerCore/Util/Converter.cs" relfile="NiteAdvServerCore/Util/Converter.cs" line="16" column="1" />
       <Breakpoint file="/Users/mac/Projects/NiteAdvServer/NiteAdvServerCore/Managers/GremlinManager.cs" relfile="NiteAdvServerCore/Managers/GremlinManager.cs" line="172" column="1" />
-      <Breakpoint file="/Users/mac/Projects/NiteAdvServer/NiteAdvServerCore/Managers/BusinessLogic.cs" relfile="NiteAdvServerCore/Managers/BusinessLogic.cs" line="149" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.ItemProperties.NiteAdvServer PreferredExecutionTarget="/Applications/Safari.app" />
 </Properties>
