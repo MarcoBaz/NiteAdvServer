@@ -1,7 +1,5 @@
 ﻿<Properties StartupConfiguration="{79474FA2-A158-48F0-AA69-61A7E940F600}|Default">
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <Xamarin.Addins.Core.Project ActiveDebugTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget." />
-  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.ItemProperties.NiteAdvServer PreferredExecutionTarget="/Applications/Safari.app" />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Release" />
   <MonoDevelop.Ide.Workbench ActiveDocument="NiteAdvServerCore/DTO/CompanyDTO.cs">
     <Files>
@@ -22,7 +20,7 @@
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
-          <Node name="NiteAdvServer" expanded="True">
+          <Node name="NiteAdvServer" expanded="True" selected="True">
             <Node name="NiteAdvServer" expanded="True">
               <Node name="Controllers" expanded="True" />
               <Node name="Properties" expanded="True">
@@ -34,7 +32,6 @@
             <Node name="NiteAdvServerCore" expanded="True">
               <Node name="DTO" expanded="True">
                 <Node name="SqlServer" expanded="True" />
-                <Node name="CompanyDTO.cs" selected="True" />
               </Node>
               <Node name="Entities" expanded="True">
                 <Node name="SqlServer" expanded="True" />
@@ -53,7 +50,7 @@
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.ItemProperties.NiteAdvServer PreferredExecutionTarget="/Applications/Safari.app" />
+  <MultiItemStartupConfigurations />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
       <Breakpoint file="/Users/mac/Projects/NiteAdvServer/NiteAdvServerCore/Managers/CosmosManager.cs" relfile="NiteAdvServerCore/Managers/CosmosManager.cs" line="184" column="1" />
@@ -62,4 +59,6 @@
       <Breakpoint file="/Users/mac/Projects/NiteAdvServer/NiteAdvServerCore/Managers/GremlinManager.cs" relfile="NiteAdvServerCore/Managers/GremlinManager.cs" line="172" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <Xamarin.Addins.Core.Project ActiveDebugTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget." />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
 </Properties>
